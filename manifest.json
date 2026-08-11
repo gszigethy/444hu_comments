@@ -1,11 +1,11 @@
 {
   "name": "444hsz",
   "short_name": "444hsz",
-  "version": "1.4.0.23",
-  "manifest_version": 2,
+  "version": "1.4.0.24",
+  "manifest_version": 3,
   "author": "nerblock",
   "description": "Kommenteld szabadon a 444.hu cikkeit!",
-  "permissions": ["http://*.444.hu/", "https://*.444.hu/"],
+  "host_permissions": ["*://*.444.hu/*"],
   "content_scripts": [
     {
       "matches": ["http://*.444.hu/*", "https://*.444.hu/*"],
@@ -15,18 +15,21 @@
     }
   ],
   "web_accessible_resources": [
-    "444hu_comments_inject.js",
-    "444hu_comments_inject_legacy.js",
-    "backburner.js",
-    "444hu_comments.css",
-    "444hu_comments_legacy.css",
-    "images/444hsz.svg",
-    "images/view_sidebar_black_24dp.svg",
-    "images/settings_black_24dp.svg"
+    {
+      "resources": [
+        "444hu_comments_inject.js",
+        "444hu_comments_inject_legacy.js",
+        "backburner.js",
+        "444hu_comments.css",
+        "444hu_comments_legacy.css",
+        "images/444hsz.svg",
+        "images/view_sidebar_black_24dp.svg",
+        "images/settings_black_24dp.svg"
+      ],
+      "matches": ["*://*.444.hu/*"]
+    }
   ],
-  "page_action": {
-    "show_matches": ["*://*.444.hu/*"],
-    "hide_matches": ["*://kor.444.hu/*", "*://membership.444.hu/*"],
+  "action": {
     "default_icon": {
       "16": "images/icon16.png",
       "19": "images/icon19.png",
