@@ -1,24 +1,36 @@
-# CI quality baseline
+# Browser extension CI checks
 
-Checks run on pushes and pull requests with read-only repository permissions.
-GitHub Actions are pinned to immutable commits; Dependabot updates those pins.
+The workflow runs on pushes, pull requests and manual requests with read-only
+repository permissions. GitHub Actions are pinned to immutable commits;
+Dependabot checks Action and CI npm dependency updates weekly.
 
-Python and extension JavaScript checks compare finding counts by file, rule and
-message against the PR base, ignoring line shifts. Existing findings remain
-visible; new findings fail CI. Pushes compare against the previous commit.
-Manual runs or new branches without a valid previous commit report the current
-baseline. Syntax, builds, tests and project validators remain strict.
+Blocking checks:
+- ESLint defect findings compared with the PR base (or previous push commit).
+- JavaScript syntax validation for the root extension scripts.
+- Manifest V3 version and referenced-resource validation.
+- Creation of an extension ZIP containing the manifest and its referenced files.
 
-Type checks, Perl::Critic and Prettier begin as nonblocking diagnostic steps.
-Their failures appear in Actions logs; they are not claimed as passing gates.
-Tighten them after reviewing and fixing the legacy baseline. Luxeva has no
-runtime test suite yet; syntax/HACS/hassfest do not replace behavioral tests.
-The irrigation coverage report is informational, without a fabricated target.
+The lint comparison counts findings by file, rule and message, ignoring line
+shifts. It uses the same explicit ESLint configuration on both revisions.
+Existing findings remain visible; new findings fail CI. Manual requests and
+new branches without a valid previous commit report the current baseline.
+The vendored `backburner.js` is excluded from ESLint, but syntax-checked.
 
-ESP32 clang-format checks only changed lines in first-party C/C++ on PRs.
-Firmware size builds both PR and base, reports binary growth and flash/RAM
-usage, and leaves capacity enforcement to the real firmware build.
+Prettier starts as a nonblocking diagnostic. Findings appear in Actions logs;
+a green workflow does not mean all existing formatting matches Prettier.
+These checks do not replace testing the extension in Chrome on 444.hu.
 
-Choose required checks in branch rules only after the first CI results are
-reviewed. These changes do not configure external Sonar accounts or branch
-rules, and do not merge themselves.
+## CI tools and package artifacts
+
+`.github/ci/node-tools/package.json` pins the direct analyzer versions. The npm
+lock file pins their transitive dependencies and integrity hashes. CI uses
+`npm ci --ignore-scripts` to verify the lock file and avoid package setup scripts.
+These tools are not browser-extension dependencies and are not included in the
+extension ZIP. To update them locally, edit the CI package versions and run:
+
+```sh
+npm install --prefix .github/ci/node-tools --package-lock-only --ignore-scripts
+```
+
+Actions uploads `chrome-extension` as a review artifact. It does not publish a
+Chrome Web Store release or change the manifest version.

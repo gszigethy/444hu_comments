@@ -25,19 +25,18 @@ jobs:
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: '24'
-      - name: Install pinned lint tools outside extension sources
-        run: npm install --prefix /tmp/extension-tools --ignore-scripts --no-audit --no-fund eslint@10.11.0 prettier@3.6.2
+      - name: Install lockfile-verified lint tools without package scripts
+        run: npm ci --prefix .github/ci/node-tools --ignore-scripts --no-audit --no-fund
       - name: Block new JavaScript defects
-        run: python .github/ci/lint_baseline.py eslint /tmp/extension-tools/node_modules/.bin/eslint --config "$PWD/eslint.config.mjs" --format json '*.js'
+        run: python .github/ci/lint_baseline.py eslint "$PWD/.github/ci/node-tools/node_modules/.bin/eslint" --config "$PWD/eslint.config.mjs" --format json '*.js'
       - name: JavaScript syntax
         run: for file in *.js; do node --check "$file"; done
       - name: Prettier diagnostics (initial baseline report)
         continue-on-error: true
-        run: /tmp/extension-tools/node_modules/.bin/prettier --check '*.js' '*.css' manifest.json
+        run: .github/ci/node-tools/node_modules/.bin/prettier --check '*.js' '*.css' manifest.json
       - name: Validate manifest and package extension
         run: python .github/ci/package_extension.py
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: chrome-extension
           path: dist/444hu_comments.zip
-
