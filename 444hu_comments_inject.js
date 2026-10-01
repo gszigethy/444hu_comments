@@ -54,10 +54,10 @@ var lastUrl444hsz = null;
       _parentEl = null,
       _darkMode = false,
       _baseUrl = document.querySelector(
-        'meta[name="444hsz-extension-baseurl"]'
+        'meta[name="444hsz-extension-baseurl"]',
       )["content"],
       _version = document.querySelector(
-        'meta[name="444hsz-extension-version"]'
+        'meta[name="444hsz-extension-version"]',
       )["content"];
 
     const _useTempUserForumFrom = new Date("2022-08-03T20:00:00+02:00");
@@ -260,7 +260,7 @@ var lastUrl444hsz = null;
         document,
         null,
         XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
-        null
+        null,
       );
 
       if (ss.snapshotLength) {
@@ -308,7 +308,7 @@ var lastUrl444hsz = null;
           "_444hsz_sidebar",
           +document
             .getElementById("comments_wrapper")
-            .classList.toggle("sidebar")
+            .classList.toggle("sidebar"),
         );
         document
           .querySelector("div#comments_tabs .titlebar button.button-sidebar")
@@ -356,7 +356,7 @@ var lastUrl444hsz = null;
               if (p.classList.contains("legacy")) {
                 _commentsButtonTopEl.style.setProperty(
                   "margin",
-                  "-10px 0 22px"
+                  "-10px 0 22px",
                 );
               }
               return true;
@@ -368,7 +368,7 @@ var lastUrl444hsz = null;
               if (p.nextElementSibling) {
                 p.parentElement.insertBefore(
                   _commentsButtonTopEl,
-                  p.nextElementSibling.nextElementSibling
+                  p.nextElementSibling.nextElementSibling,
                 );
 
                 _commentsButtonTopEl.className =
@@ -378,7 +378,7 @@ var lastUrl444hsz = null;
               } else {
                 p.parentElement.parentElement.insertBefore(
                   _commentsButtonTopEl,
-                  p.parentElement.nextElementSibling
+                  p.parentElement.nextElementSibling,
                 );
                 _commentsButtonTopEl.className =
                   _commentsButtonTopEl.nextElementSibling.className;
@@ -423,7 +423,7 @@ var lastUrl444hsz = null;
           .classList.add("hide");
         storeSetting("_444hsz_announcement_read", 1);
         document.querySelector(
-          ".comments-settings label>input#rulesToggle"
+          ".comments-settings label>input#rulesToggle",
         ).checked = false;
       }
 
@@ -467,7 +467,7 @@ var lastUrl444hsz = null;
         }
 
         document.querySelector(
-          ".comments-settings label>input#recommendationsToggle"
+          ".comments-settings label>input#recommendationsToggle",
         ).onclick = onClickRecommendationsToggle;
         if (null == document.querySelector("#recommendationsToggleStyle")) {
           addHideStyle();
@@ -497,33 +497,33 @@ var lastUrl444hsz = null;
       }
 
       document.querySelector(
-        "#comments_tabs .titlebar button.button-sidebar"
+        "#comments_tabs .titlebar button.button-sidebar",
       ).onclick = onClickSidebarToggle;
       document.querySelector(
-        "#comments_tabs .titlebar button.button-settings"
+        "#comments_tabs .titlebar button.button-settings",
       ).onclick = onClickToggleSettings;
 
       document.getElementById("tab-user").onclick = onClickForumUser;
       document.getElementById("tab-444hu").onclick = onClickForum444hu;
 
       document.querySelector(
-        ".comments-contents .forum-rules .close-button"
+        ".comments-contents .forum-rules .close-button",
       ).onclick = onClickCloseRules;
       document.querySelector(
-        ".comments-contents .forum-rules .text-close-button"
+        ".comments-contents .forum-rules .text-close-button",
       ).onclick = onClickCloseRules;
       document.querySelector(".comments-settings input#rulesToggle").onclick =
         onClickRulesToggle;
 
       document.querySelector(
-        ".comments-settings input#autoloadToggle"
+        ".comments-settings input#autoloadToggle",
       ).onclick = onClickAutoloadToggle;
 
       document.querySelector(
-        ".comments-settings input#userForumShortName"
+        ".comments-settings input#userForumShortName",
       ).onchange = onChangeUserForumShortname;
       document.querySelector(
-        ".comments-settings input#userForumShortName"
+        ".comments-settings input#userForumShortName",
       ).onkeypress = onKeypressUserForumShortname;
 
       initRecommendationsToggle();
@@ -556,7 +556,7 @@ var lastUrl444hsz = null;
           _userForumShortName = _defaultUserForumShortName;
         }
         document.querySelector(
-          ".comments-settings input#userForumShortName"
+          ".comments-settings input#userForumShortName",
         ).value =
           _userForumShortName == _defaultUserForumShortName
             ? ""
@@ -565,7 +565,7 @@ var lastUrl444hsz = null;
 
       // use temp forum if article date is in the forum outage interval
       const publishedEl = document.querySelector(
-        'meta[property="article:published_time"]'
+        'meta[property="article:published_time"]',
       );
       if (publishedEl) {
         const publishedDate = new Date(publishedEl.getAttribute("content"));
@@ -602,9 +602,8 @@ var lastUrl444hsz = null;
         document
           .querySelector(".comments-contents .forum-rules")
           .classList.add("hide");
-        document.querySelector(
-          ".comments-settings input#rulesToggle"
-        ).checked = false;
+        document.querySelector(".comments-settings input#rulesToggle").checked =
+          false;
       }
 
       if (loadSetting("_444hsz_show_disqus_recommendations") == 1) {
@@ -615,7 +614,7 @@ var lastUrl444hsz = null;
 
       if (loadSetting("_444hsz_autoload_comments") == 1) {
         document.querySelector(
-          ".comments-settings input#autoloadToggle"
+          ".comments-settings input#autoloadToggle",
         ).checked = true;
         document.querySelector(".comments-toggle").click();
       }
@@ -636,7 +635,7 @@ var lastUrl444hsz = null;
         case 0:
           _parentEl.insertBefore(
             _commentsSectionTempEl,
-            _parentEl.firstElementChild
+            _parentEl.firstElementChild,
           );
           break;
         case -1:
@@ -655,7 +654,7 @@ var lastUrl444hsz = null;
         case 4:
           _parentEl.nextElementSibling.lastElementChild.firstElementChild.insertBefore(
             _commentsSectionTempEl,
-            null
+            null,
           );
           _commentsSectionTempEl.style.setProperty("margin", "0");
           break;
@@ -663,7 +662,7 @@ var lastUrl444hsz = null;
           _parentEl.nextElementSibling.nextElementSibling.lastElementChild.firstElementChild.insertBefore(
             _commentsSectionTempEl,
             _parentEl.nextElementSibling.nextElementSibling.lastElementChild
-              .firstElementChild.lastElementChild
+              .firstElementChild.lastElementChild,
           );
           _commentsSectionTempEl.style.setProperty("margin", "0");
           break;
@@ -729,7 +728,7 @@ var lastUrl444hsz = null;
           document,
           null,
           XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
-          null
+          null,
         );
         if (btns.snapshotLength) {
           for (let i = 0; i < btns.snapshotLength; i++) {
@@ -773,7 +772,7 @@ var lastUrl444hsz = null;
         "--comments-bgcolor",
         _darkMode
           ? "var(--comments-bgcolor-dark)"
-          : "var(--comments-bgcolor-light)"
+          : "var(--comments-bgcolor-light)",
       );
 
       log("Dark mode: " + _darkMode);
@@ -793,14 +792,14 @@ var lastUrl444hsz = null;
           log(
             "Added comments section for: '" +
               router.get("currentRoute.params.slug") +
-              "'"
+              "'",
           );
           _commentsSectionLoadRetries--;
         } else {
           log(
             "Failed to add comments section for: '" +
               router.get("currentRoute.params.slug") +
-              "'"
+              "'",
           );
           if (_commentsSectionLoadRetries > 0) {
             _commentsSectionLoadRetries--;
@@ -844,7 +843,7 @@ var lastUrl444hsz = null;
           }
         },
       },
-      "change"
+      "change",
     );
   }
 })();

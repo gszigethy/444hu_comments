@@ -54,7 +54,7 @@
       document.getElementById("comments").style.width =
         "var(--docked-comments-width)";
       document.querySelector(
-        "section#comments .comments-docked-resizer"
+        "section#comments .comments-docked-resizer",
       ).style.right =
         "calc(var(--docked-comments-width) - var(--docked-comments-resizer-width))";
       if (null !== document.querySelector(".comments-toggle"))
@@ -66,7 +66,7 @@
       let tmp = new DOMParser()
         .parseFromString(
           '<button class="gae-comment-click-open comments-toggle-top">Hozzászólások</button>',
-          `text/html`
+          `text/html`,
         )
         .getElementsByTagName(`body`)[0].children;
       bl.prepend(...tmp);
@@ -101,7 +101,7 @@
   function addResizeBar() {
     var ce = document.querySelector("section#comments");
     var re = document.querySelector(
-      "section#comments .comments-docked-resizer"
+      "section#comments .comments-docked-resizer",
     );
     re.addEventListener("mousedown", initResize, false);
 
@@ -179,7 +179,7 @@
 
   function init() {
     let af = document.querySelector(
-      getConfig("comments_section_insert_selector")
+      getConfig("comments_section_insert_selector"),
     );
     if (null === af) {
       log("not on article page, doing nothing");
@@ -201,7 +201,7 @@
             '<section id="comments">' +
               getConfig("comments_section_html") +
               "</section>",
-            `text/html`
+            `text/html`,
           )
           .getElementsByTagName(`body`)[0].children;
         af.append(...tmp);
