@@ -1,0 +1,42 @@
+name: Quality baseline
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    env:
+      QUALITY_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+      - name: Normalize comparison base
+        run: |
+          if [ -z "$QUALITY_BASE" ] || ! git cat-file -e "$QUALITY_BASE^{commit}" 2>/dev/null; then
+            echo "QUALITY_BASE=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          fi
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+      - name: Install lockfile-verified lint tools without package scripts
+        run: npm ci --prefix .github/ci/node-tools --ignore-scripts --no-audit --no-fund
+      - name: Block new JavaScript defects
+        run: python .github/ci/lint_baseline.py eslint "$PWD/.github/ci/node-tools/node_modules/.bin/eslint" --config "$PWD/eslint.config.mjs" --format json '*.js'
+      - name: JavaScript syntax
+        run: for file in *.js; do node --check "$file"; done
+      - name: Prettier diagnostics (initial baseline report)
+        continue-on-error: true
+        run: .github/ci/node-tools/node_modules/.bin/prettier --check '*.js' '*.css' manifest.json
+      - name: Validate manifest and package extension
+        run: python .github/ci/package_extension.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: chrome-extension
+          path: dist/444hu_comments.zip

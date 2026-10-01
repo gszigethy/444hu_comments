@@ -1,0 +1,10 @@
+{
+  "name": "444hu-ci-tools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CI analyzers; not part of the browser extension",
+  "devDependencies": {
+    "eslint": "10.11.0",
+    "prettier": "3.6.2"
+  }
+}
