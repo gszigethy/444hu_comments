@@ -1,0 +1,972 @@
+[
+  {
+    "slug": "444",
+    "title": "444.hu és blogjai",
+    "home": "https://444.hu/",
+    "homeStatus": 200,
+    "homeFinal": "https://444.hu/",
+    "candidates": [
+      "https://444.hu/2026/10/07/tobb-mint-13-milliard-forintbol-allamositottak-a-meddosegi-centrumokat-orbanek",
+      "https://444.hu/2026/10/07/14-ember-koztuk-negy-gyerek-meghalt-a-prilukit-ert-orosz-raketatamadasban",
+      "https://444.hu/2026/10/07/ujpest-utfelujitas-mozgaskorlatozott-parkolo-bkk-fovaros",
+      "https://444.hu/2026/10/07/megterulesi-szamitasok-nelkul-vett-500-milliardert-irodahazakat-az-orban-kormany",
+      "https://444.hu/2026/10/07/102-evesen-meghalt-eva-marie-saint-hollywood-aranykoranak-egyik-utolso-sztarja"
+    ],
+    "article": {
+      "url": "https://444.hu/2026/10/07/tobb-mint-13-milliard-forintbol-allamositottak-a-meddosegi-centrumokat-orbanek",
+      "status": 200,
+      "finalUrl": "https://444.hu/2026/10/07/tobb-mint-13-milliard-forintbol-allamositottak-a-meddosegi-centrumokat-orbanek",
+      "bytes": 35554,
+      "ogType": "article",
+      "jsonLdTypes": [
+        "BreadcrumbList",
+        "NewsArticle"
+      ],
+      "canonical": "https://444.hu/2026/10/07/tobb-mint-13-milliard-forintbol-allamositottak-a-meddosegi-centrumokat-orbanek",
+      "canonicalMatchesUrl": true,
+      "tags": {
+        "article": 0,
+        "main": 0,
+        "footer": 1,
+        "h1": 1,
+        "time": 1
+      },
+      "articleClasses": [],
+      "hasCommentsContainer": false,
+      "cspPresent": false,
+      "cspScriptSrc": "",
+      "cspBlocksDisqus": false,
+      "poweredBy": "cloudflare",
+      "consentOrPaywall": [],
+      "frameworks": [],
+      "title": "Több mint 13 milliárd forintból államosították a meddőségi centrumokat Orbánék"
+    }
+  },
+  {
+    "slug": "qubit",
+    "title": "Qubit",
+    "home": "https://qubit.hu/",
+    "homeStatus": 200,
+    "homeFinal": "https://qubit.hu/",
+    "candidates": [
+      "https://qubit.hu/2026/09/29/kezelhetetlen-intelligenciarobbanasra-figyelmeztetnek-a-vilag-vezeto-ai-kutatoi",
+      "https://qubit.hu/2026/09/28/ha-alberletet-is-kellene-fizetnem-fogalmam-sincs-mire-lenne-eleg-botranyosak-a-fizetesek-a-modellvaltasnak-ellenallo-egyetemeken",
+      "https://qubit.hu/2026/09/27/felelos-vizkormanyzast",
+      "https://qubit.hu/2026/09/26/randalirozo-agensek-rettego-ai-vezerek-vilagvege-riado-hogy-jutottunk-idaig",
+      "https://qubit.hu/2026/09/29/megdobbento-tudomanyos-eredmeny-a-macskak-a-nap-nagy-reszet-lustalkodassal-toltik",
+      "https://qubit.hu/2026/09/27/a-csimpanzoktol-a-dronokig-hogyan-lett-az-osi-agressziobol-modern-haboru"
+    ],
+    "article": {
+      "url": "https://qubit.hu/2026/09/29/kezelhetetlen-intelligenciarobbanasra-figyelmeztetnek-a-vilag-vezeto-ai-kutatoi",
+      "status": 200,
+      "finalUrl": "https://qubit.hu/2026/09/29/kezelhetetlen-intelligenciarobbanasra-figyelmeztetnek-a-vilag-vezeto-ai-kutatoi",
+      "bytes": 128699,
+      "ogType": "article",
+      "jsonLdTypes": [
+        "BreadcrumbList",
+        "NewsArticle"
+      ],
+      "canonical": "https://qubit.hu/2026/09/29/kezelhetetlen-intelligenciarobbanasra-figyelmeztetnek-a-vilag-vezeto-ai-kutatoi",
+      "canonicalMatchesUrl": true,
+      "tags": {
+        "article": 5,
+        "main": 0,
+        "footer": 2,
+        "h1": 6,
+        "time": 0
+      },
+      "articleClasses": [
+        "_1chu0ywg",
+        "_1chu0ywg",
+        "_1chu0ywg"
+      ],
+      "hasCommentsContainer": false,
+      "cspPresent": false,
+      "cspScriptSrc": "",
+      "cspBlocksDisqus": false,
+      "poweredBy": "cloudflare",
+      "consentOrPaywall": [
+        "paywall"
+      ],
+      "frameworks": [],
+      "title": "Kezelhetetlen intelligenciarobbanásra figyelmeztetnek a világ vezető AI-kutatói"
+    }
+  },
+  {
+    "slug": "telex",
+    "title": "Telex",
+    "home": "https://telex.hu/",
+    "homeStatus": 200,
+    "homeFinal": "https://telex.hu/",
+    "candidates": [
+      "https://telex.hu/belfold/2026/10/07/budapesti-olimpia-median-kozvelemeny-kutatas",
+      "https://telex.hu/techtud/2026/10/07/autoszerviz-interdiesel-autojavitas-muszaki-vizsga-dizelmotor-karbantartas",
+      "https://telex.hu/gazdasag/2026/10/07/lealltak-a-wolt-rendelesei-technikai-problema-van-a-hatterben"
+    ],
+    "article": {
+      "url": "https://telex.hu/belfold/2026/10/07/budapesti-olimpia-median-kozvelemeny-kutatas",
+      "status": 200,
+      "finalUrl": "https://telex.hu/belfold/2026/10/07/budapesti-olimpia-median-kozvelemeny-kutatas",
+      "bytes": 60223,
+      "ogType": "article",
+      "jsonLdTypes": [
+        "NewsArticle"
+      ],
+      "canonical": "https://telex.hu/belfold/2026/10/07/budapesti-olimpia-median-kozvelemeny-kutatas",
+      "canonicalMatchesUrl": true,
+      "tags": {
+        "article": 0,
+        "main": 1,
+        "footer": 1,
+        "h1": 1,
+        "time": 0
+      },
+      "articleClasses": [],
+      "hasCommentsContainer": false,
+      "cspPresent": false,
+      "cspScriptSrc": "",
+      "cspBlocksDisqus": false,
+      "poweredBy": "cloudflare",
+      "consentOrPaywall": [
+        "quantcast"
+      ],
+      "frameworks": [
+        "__nuxt__"
+      ],
+      "title": "Telex: Medián: A magyar lakosság közel kétharmada támogatja a budapesti olimpiát"
+    }
+  },
+  {
+    "slug": "transtelex",
+    "title": "Transtelex",
+    "home": "https://transtelex.ro/",
+    "homeStatus": 200,
+    "homeFinal": "https://transtelex.ro/",
+    "candidates": [
+      "https://transtelex.ro/eletmod/2026/10/07/ufoinvazio-kolozsvaron",
+      "https://transtelex.ro/penzcsinalok/2026/10/07/ikea-romana-uj-uzletek",
+      "https://transtelex.ro/kulfold/2026/10/07/eu-europai-parlament-donald-trump-aranyszobor",
+      "https://transtelex.ro/kozelet/2026/10/07/luca-niculescu-kormanyprogram",
+      "https://transtelex.ro/transtelex/2026/10/07/mcc-erdely-felveteli-jovo-kilatasok",
+      "https://transtelex.ro/techtud/2026/10/07/kemiai-nobel-dij-henri-b-kagan-kenso-soai-molekula-tukorkep-aszimmetria"
+    ],
+    "article": {
+      "url": "https://transtelex.ro/eletmod/2026/10/07/ufoinvazio-kolozsvaron",
+      "status": 200,
+      "finalUrl": "https://transtelex.ro/eletmod/2026/10/07/ufoinvazio-kolozsvaron",
+      "bytes": 88646,
+      "ogType": "article",
+      "jsonLdTypes": [
+        "NewsArticle"
+      ],
+      "canonical": "https://transtelex.ro/eletmod/2026/10/07/ufoinvazio-kolozsvaron",
+      "canonicalMatchesUrl": true,
+      "tags": {
+        "article": 0,
+        "main": 1,
+        "footer": 1,
+        "h1": 1,
+        "time": 0
+      },
+      "articleClasses": [],
+      "hasCommentsContainer": false,
+      "cspPresent": false,
+      "cspScriptSrc": "",
+      "cspBlocksDisqus": false,
+      "poweredBy": "cloudflare",
+      "consentOrPaywall": [
+        "quantcast"
+      ],
+      "frameworks": [
+        "__nuxt__"
+      ],
+      "title": "Transtelex: Ufóinvázió Kolozsváron"
+    }
+  },
+  {
+    "slug": "24",
+    "title": "24",
+    "home": "https://24.hu/",
+    "homeStatus": 200,
+    "homeFinal": "https://24.hu/",
+    "candidates": [
+      "https://24.hu/tech/2026/10/07/dronok-esofakasztas-vizhiany-aszaly/",
+      "https://ng.24.hu/foto/a-nap-kepe/2026/10/07/tronorokos-a-kopjes-csucsan/"
+    ],
+    "article": {
+      "url": "https://24.hu/tech/2026/10/07/dronok-esofakasztas-vizhiany-aszaly/",
+      "status": 200,
+      "finalUrl": "https://24.hu/tech/2026/10/07/dronok-esofakasztas-vizhiany-aszaly/",
+      "bytes": 125040,
+      "ogType": "article",
+      "jsonLdTypes": [
+        "BreadcrumbList",
+        "ImageObject",
+        "NewsArticle",
+        "NewsMediaOrganization",
+        "Person",
+        "WebPage",
+        "WebSite"
+      ],
+      "canonical": "https://24.hu/tech/2026/10/07/dronok-esofakasztas-vizhiany-aszaly/",
+      "canonicalMatchesUrl": true,
+      "tags": {
+        "article": 1,
+        "main": 0,
+        "footer": 1,
+        "h1": 2,
+        "time": 0
+      },
+      "articleClasses": [
+        "m-articleWidget__wrap"
+      ],
+      "hasCommentsContainer": false,
+      "cspPresent": false,
+      "cspScriptSrc": "",
+      "cspBlocksDisqus": false,
+      "poweredBy": "nginx",
+      "consentOrPaywall": [],
+      "frameworks": [],
+      "title": "Drónokkal fakasztanak esőt az egyre súlyosabb vízhiányban | 24.hu"
+    }
+  },
+  {
+    "slug": "szabadeuropa",
+    "title": "Szabad Európa",
+    "home": "https://www.szabadeuropa.hu/",
+    "homeStatus": 200,
+    "homeFinal": "https://www.szabadeuropa.hu/",
+    "candidates": [
+      "https://www.szabadeuropa.hu/a/utolso-kozlemeny-2025-11-20/33597421.html",
+      "https://www.szabadeuropa.hu/a/a-szabadsag-hullamhosszan-75-eve-indult-szabad-europa-radio/33463800.html",
+      "https://www.szabadeuropa.hu/a/a-szabad-europa-radio-es-1956/30907290.html",
+      "https://www.szabadeuropa.hu/a/archivum-39-radiozavaras/31812818.html",
+      "https://www.szabadeuropa.hu/a/szabad-europa-a-fuggetlen-ujsagiras-barmilyen-korlatozasa-aggaszto-/33421262.html",
+      "https://www.szabadeuropa.hu/a/trump-alairta-het-ugynokseg-jelentos-leepiteset-erintett-a-szabad-europa-is/33348867.html"
+    ],
+    "article": {
+      "url": "https://www.szabadeuropa.hu/a/utolso-kozlemeny-2025-11-20/33597421.html",
+      "status": 200,
+      "finalUrl": "https://www.szabadeuropa.hu/a/utolso-kozlemeny-2025-11-20/33597421.html",
+      "bytes": 65484,
+      "ogType": "article",
+      "jsonLdTypes": [
+        "NewsArticle"
+      ],
+      "canonical": "https://www.szabadeuropa.hu/a/utolso-kozlemeny-2025-11-20/33597421.html",
+      "canonicalMatchesUrl": true,
+      "tags": {
+        "article": 0,
+        "main": 1,
+        "footer": 1,
+        "h1": 1,
+        "time": 1
+      },
+      "articleClasses": [],
+      "hasCommentsContainer": false,
+      "cspPresent": false,
+      "cspScriptSrc": "",
+      "cspBlocksDisqus": false,
+      "poweredBy": null,
+      "consentOrPaywall": [],
+      "frameworks": [],
+      "title": "Közlemény"
+    }
+  },
+  {
+    "slug": "rtl",
+    "title": "RTL",
+    "home": "https://rtl.hu/",
+    "homeStatus": 200,
+    "homeFinal": "https://rtl.hu/",
+    "candidates": [
+      "https://rtl.hu/az-arulok-gyilkossag-a-kastelyban",
+      "https://rtl.hu/sport/uefa-bajnokok-ligaja",
+      "https://rtl.hu/celeb-vagyok-ments-ki-innen",
+      "https://rtl.hu/fokusz/2026/08/07/horanyi-juli-varandos-enekesno-denes-viktor-nehezsegek-babavaras-csoda",
+      "https://rtl.hu/a-legjobb-ajanlat/2026/10/05/vitez-varga-viktor-muveszet-festmeny-polgar-arpad",
+      "https://rtl.hu/bulvar/2026/10/04/pataki-zita-bucsu-bejegyzes-auto"
+    ],
+    "article": {
+      "url": "https://rtl.hu/fokusz/2026/08/07/horanyi-juli-varandos-enekesno-denes-viktor-nehezsegek-babavaras-csoda",
+      "status": 200,
+      "finalUrl": "https://rtl.hu/fokusz/2026/08/07/horanyi-juli-varandos-enekesno-denes-viktor-nehezsegek-babavaras-csoda",
+      "bytes": 184407,
+      "ogType": "video.other",
+      "jsonLdTypes": [
+        "BreadcrumbList",
+        "NewsArticle",
+        "Organization"
+      ],
+      "canonical": "https://rtl.hu/fokusz/2026/08/07/horanyi-juli-varandos-enekesno-denes-viktor-nehezsegek-babavaras-csoda",
+      "canonicalMatchesUrl": true,
+      "tags": {
+        "article": 0,
+        "main": 1,
+        "footer": 1,
+        "h1": 3,
+        "time": 0
+      },
+      "articleClasses": [],
+      "hasCommentsContainer": false,
+      "cspPresent": false,
+      "cspScriptSrc": "",
+      "cspBlocksDisqus": false,
+      "poweredBy": "nginx",
+      "consentOrPaywall": [
+        "premium"
+      ],
+      "frameworks": [],
+      "title": "Csodaként éli meg várandósságát Horányi Juli – azt is elárulta, milyen nemű lesz a kisbabájuk"
+    }
+  },
+  {
+    "slug": "lakmusz",
+    "title": "Lakmusz",
+    "home": "https://www.lakmusz.hu/",
+    "homeStatus": 200,
+    "homeFinal": "https://lakmusz.hu/",
+    "candidates": [],
+    "article": null
+  },
+  {
+    "slug": "merce",
+    "title": "Mérce",
+    "home": "https://merce.hu/",
+    "homeStatus": 200,
+    "homeFinal": "https://merce.hu/",
+    "candidates": [
+      "https://merce.hu/nok-es-gyermekek-elleni-eroszak-aldozatai/",
+      "https://merce.hu/2021/04/25/ferge-zsuzsa-90/",
+      "https://merce.hu/2026/10/07/elzugtak-forradalmai-elmaradt-rendszervaltas-a-mome-n/",
+      "https://tett.merce.hu/2026/10/02/hirosima-megtorni-a-hallgatast/",
+      "https://merce.hu/2026/10/03/rossz-hirunk-van-a-gyari-munkas-es-a-miniszterelnok-a-torveny-elott-sem-egyenlo/",
+      "https://merce.hu/2026/10/01/konnyebb-elkepzelni-egy-varos-pusztulasat-mint-egy-varost-autok-nelkul/"
+    ],
+    "article": {
+      "url": "https://merce.hu/2021/04/25/ferge-zsuzsa-90/",
+      "status": 200,
+      "finalUrl": "https://merce.hu/2021/04/25/ferge-zsuzsa-90/",
+      "bytes": 159943,
+      "ogType": "article",
+      "jsonLdTypes": [],
+      "canonical": "https://merce.hu/2021/04/25/ferge-zsuzsa-90/",
+      "canonicalMatchesUrl": true,
+      "tags": {
+        "article": 0,
+        "main": 1,
+        "footer": 1,
+        "h1": 2,
+        "time": 0
+      },
+      "articleClasses": [],
+      "hasCommentsContainer": false,
+      "cspPresent": false,
+      "cspScriptSrc": "",
+      "cspBlocksDisqus": false,
+      "poweredBy": "cloudflare",
+      "consentOrPaywall": [],
+      "frameworks": [],
+      "title": "Egy életmű az egyenlőség szolgálatában: Ferge Zsuzsát köszöntjük! « Mérce"
+    }
+  },
+  {
+    "slug": "forbes",
+    "title": "Forbes",
+    "home": "https://forbes.hu/",
+    "homeStatus": 200,
+    "homeFinal": "https://www.forbes.hu/",
+    "candidates": [
+      "https://www.forbes.hu/hirek/hivatalosan-is-kiderult-milyen-jogalapon-figyeltek-meg-a-letartoztatott-kepviselot-a-mentelmi-joga-felfuggesztese-elott/",
+      "https://www.forbes.hu/penz/kozel-harom-het-utan-ujra-valtoztak-az-uzemanyagarak-de-a-rossz-iranyba/",
+      "https://www.forbes.hu/uzlet/ki-nem-talalnad-hany-milliard-forint-veszteseget-produkalt-az-aldi-az-elmult-het-evben-a-lidl-tobb-mint-200-milliard-forintnyi-nyeresege-mellett/",
+      "https://www.forbes.hu/milliardosok/most-akkor-kinek-van-igaza-magyar-peter-szerint-meszarosek-keszek-megszuntetni-meszarosek-szerint-meg-csak-folynak-az-egyeztetesek-a-23-billio-forintos-sztradabiz/",
+      "https://www.forbes.hu/uzlet/tippelj-hany-milliardbol-allamositottak-orbanek-a-hazai-lombikprogramok-atyjanak-halozatat-es-a-szektor-tobbi-reszet/",
+      "https://www.forbes.hu/uzlet/az-olimpia-mar-nem-orban-ugye-hann-endreek-friss-felmereseben-peldatlanul-nagy-az-egyetertes/"
+    ],
+    "article": {
+      "url": "https://www.forbes.hu/hirek/hivatalosan-is-kiderult-milyen-jogalapon-figyeltek-meg-a-letartoztatott-kepviselot-a-mentelmi-joga-felfuggesztese-elott/",
+      "status": 200,
+      "finalUrl": "https://www.forbes.hu/hirek/hivatalosan-is-kiderult-milyen-jogalapon-figyeltek-meg-a-letartoztatott-kepviselot-a-mentelmi-joga-felfuggesztese-elott/",
+      "bytes": 164229,
+      "ogType": "article",
+      "jsonLdTypes": [
+        "BreadcrumbList",
+        "ImageObject",
+        "NewsArticle",
+        "Organization",
+        "Person",
+        "WebPage",
+        "WebSite"
+      ],
+      "canonical": "https://www.forbes.hu/hirek/hivatalosan-is-kiderult-milyen-jogalapon-figyeltek-meg-a-letartoztatott-kepviselot-a-mentelmi-joga-felfuggesztese-elott/",
+      "canonicalMatchesUrl": true,
+      "tags": {
+        "article": 0,
+        "main": 1,
+        "footer": 1,
+        "h1": 1,
+        "time": 0
+      },
+      "articleClasses": [],
+      "hasCommentsContainer": false,
+      "cspPresent": false,
+      "cspScriptSrc": "",
+      "cspBlocksDisqus": false,
+      "poweredBy": "cloudflare",
+      "consentOrPaywall": [
+        "cookiebot",
+        "premium"
+      ],
+      "frameworks": [
+        "wp-content"
+      ],
+      "title": "Hivatalosan is kiderült, milyen jogalapon figyelték meg a letartóztatott képviselőt a mentelmi joga felfüggesztése előtt"
+    }
+  },
+  {
+    "slug": "media1",
+    "title": "Media1",
+    "home": "https://media1.hu/",
+    "homeStatus": 200,
+    "homeFinal": "https://media1.hu/",
+    "candidates": [
+      "https://media1.hu/2026/10/07/bejelentettek-mikor-indul-az-atv-heti-naplo-uj-konkurenciaja-papp-gergovel-es-tobb-korabbi-naplossal/",
+      "https://media1.hu/2026/10/07/friderikusz-sandor-ismet-tavozhat-az-rtl-tol-hiaba-vartak-a-nezok-a-friderikusz-talkshow-folytatasat/",
+      "https://media1.hu/2026/10/07/meghalt-pinter-dezso-tv2-alapito-elnoke-magyar-radio-sbs/",
+      "https://media1.hu/2026/10/06/bayer-zsolt-nka-tamogatas-magyar-nemzet-elszamolas/",
+      "https://media1.hu/2026/10/05/atv-online-foszerkeszto-gyorik-ferenc-top-news-hungary-twn-rogan-cecilia/",
+      "https://media1.hu/2026/10/05/az-atv-tol-igazol-sajtost-az-uj-nepszabadsag/"
+    ],
+    "article": {
+      "url": "https://media1.hu/2026/10/07/bejelentettek-mikor-indul-az-atv-heti-naplo-uj-konkurenciaja-papp-gergovel-es-tobb-korabbi-naplossal/",
+      "status": 200,
+      "finalUrl": "https://media1.hu/2026/10/07/bejelentettek-mikor-indul-az-atv-heti-naplo-uj-konkurenciaja-papp-gergovel-es-tobb-korabbi-naplossal/",
+      "bytes": 174145,
+      "ogType": "article",
+      "jsonLdTypes": [
+        "BreadcrumbList",
+        "ImageObject",
+        "NewsArticle",
+        "Organization",
+        "Person",
+        "WebPage",
+        "WebSite"
+      ],
+      "canonical": "https://media1.hu/2026/10/07/bejelentettek-mikor-indul-az-atv-heti-naplo-uj-konkurenciaja-papp-gergovel-es-tobb-korabbi-naplossal/",
+      "canonicalMatchesUrl": true,
+      "tags": {
+        "article": 9,
+        "main": 0,
+        "footer": 2,
+        "h1": 1,
+        "time": 2
+      },
+      "articleClasses": [
+        "elementor-post",
+        "elementor-post",
+        "elementor-post"
+      ],
+      "hasCommentsContainer": false,
+      "cspPresent": false,
+      "cspScriptSrc": "",
+      "cspBlocksDisqus": false,
+      "poweredBy": "cloudflare",
+      "consentOrPaywall": [],
+      "frameworks": [
+        "wp-content"
+      ],
+      "title": "Október 9-én indul a Riporterek Papp Gergővel a TV4-en | Media1"
+    }
+  },
+  {
+    "slug": "theguardian",
+    "title": "The Guardian",
+    "home": "https://theguardian.com/",
+    "homeStatus": 200,
+    "homeFinal": "https://www.theguardian.com/europe",
+    "candidates": [
+      "https://www.theguardian.com/lifeandstyle/2026/oct/07/a-moment-that-changed-me-greek-version-strictly",
+      "https://www.theguardian.com/artanddesign/gallery/2026/oct/07/i-was-drawn-to-the-femminielli-blurring-gender-in-naples-in-pictures",
+      "https://www.theguardian.com/society/2026/oct/07/sugar-rations-health-blood-pressure-ageing",
+      "https://www.theguardian.com/commentisfree/2026/oct/07/mother-parisian-student-violence-schools-protest-presidential-election",
+      "https://www.theguardian.com/world/2026/oct/06/trauma-of-7-october-israel-survivors-three-years-hamas-after-attacks",
+      "https://www.theguardian.com/tv-and-radio/2026/oct/07/carrie-review-summer-h-howel-prime-video-horror"
+    ],
+    "article": {
+      "url": "https://www.theguardian.com/lifeandstyle/2026/oct/07/a-moment-that-changed-me-greek-version-strictly",
+      "status": 200,
+      "finalUrl": "https://www.theguardian.com/lifeandstyle/2026/oct/07/a-moment-that-changed-me-greek-version-strictly",
+      "bytes": 324278,
+      "ogType": "article",
+      "jsonLdTypes": [
+        "NewsArticle",
+        "WebPage"
+      ],
+      "canonical": "https://www.theguardian.com/lifeandstyle/2026/oct/07/a-moment-that-changed-me-greek-version-strictly",
+      "canonicalMatchesUrl": true,
+      "tags": {
+        "article": 1,
+        "main": 1,
+        "footer": 1,
+        "h1": 1,
+        "time": 0
+      },
+      "articleClasses": [
+        "dcr-6cuoze"
+      ],
+      "hasCommentsContainer": false,
+      "cspPresent": true,
+      "cspScriptSrc": "script-src https: 'unsafe-inline' 'unsafe-eval' blob: 'unsafe-inline'",
+      "cspBlocksDisqus": false,
+      "poweredBy": null,
+      "consentOrPaywall": [
+        "sourcepoint"
+      ],
+      "frameworks": [],
+      "title": "A moment that changed me: I was heading for disaster on the Greek version of Strictly. Then instinct kicked in | Dance |"
+    }
+  },
+  {
+    "slug": "magyarhang",
+    "title": "Magyar Hang",
+    "home": "https://hang.hu/",
+    "homeStatus": 200,
+    "homeFinal": "https://hang.hu/",
+    "candidates": [
+      "https://hang.hu/belfold/a-luxizas-meszaros-elszamoltatasara-is-igenyt-tamaszt-192810",
+      "https://hang.hu/koffein/szia-uram-doglott-oroszlan-erdekel-192794"
+    ],
+    "article": {
+      "url": "https://hang.hu/belfold/a-luxizas-meszaros-elszamoltatasara-is-igenyt-tamaszt-192810",
+      "status": 200,
+      "finalUrl": "https://hang.hu/belfold/a-luxizas-meszaros-elszamoltatasara-is-igenyt-tamaszt-192810",
+      "bytes": 155687,
+      "ogType": "article",
+      "jsonLdTypes": [
+        "Article",
+        "Organization"
+      ],
+      "canonical": "https://hang.hu/belfold/a-luxizas-meszaros-elszamoltatasara-is-igenyt-tamaszt-192810",
+      "canonicalMatchesUrl": true,
+      "tags": {
+        "article": 0,
+        "main": 1,
+        "footer": 1,
+        "h1": 1,
+        "time": 0
+      },
+      "articleClasses": [],
+      "hasCommentsContainer": false,
+      "cspPresent": false,
+      "cspScriptSrc": "",
+      "cspBlocksDisqus": false,
+      "poweredBy": "cloudflare",
+      "consentOrPaywall": [],
+      "frameworks": [
+        "wp-content"
+      ],
+      "title": "A luxizás látványa Mészáros elszámoltatására is még inkább igényt támaszt | Magyar Hang"
+    }
+  },
+  {
+    "slug": "magyarnarancs",
+    "title": "Magyar Narancs",
+    "home": "https://magyarnarancs.hu/",
+    "homeStatus": 200,
+    "homeFinal": "https://magyarnarancs.hu/",
+    "candidates": [
+      "https://magyarnarancs.hu/publicisztika/kaprinyak-tibor-alelnok-a-vadaszbol-lett-vad-280314"
+    ],
+    "article": {
+      "url": "https://magyarnarancs.hu/publicisztika/kaprinyak-tibor-alelnok-a-vadaszbol-lett-vad-280314",
+      "status": 200,
+      "finalUrl": "https://magyarnarancs.hu/publicisztika/kaprinyak-tibor-alelnok-a-vadaszbol-lett-vad-280314",
+      "bytes": 110720,
+      "ogType": "article",
+      "jsonLdTypes": [],
+      "canonical": "https://magyarnarancs.hu/publicisztika/kaprinyak-tibor-alelnok-a-vadaszbol-lett-vad-280314",
+      "canonicalMatchesUrl": true,
+      "tags": {
+        "article": 21,
+        "main": 1,
+        "footer": 1,
+        "h1": 1,
+        "time": 0
+      },
+      "articleClasses": [
+        "main-article",
+        "card",
+        "card"
+      ],
+      "hasCommentsContainer": false,
+      "cspPresent": false,
+      "cspScriptSrc": "",
+      "cspBlocksDisqus": false,
+      "poweredBy": "cloudflare",
+      "consentOrPaywall": [
+        "paywall",
+        "premium"
+      ],
+      "frameworks": [],
+      "title": "Kaprinyák Tibor alelnök, a vadászból lett vad | Magyar Narancs"
+    }
+  },
+  {
+    "slug": "raketa",
+    "title": "Rakéta",
+    "home": "https://raketa.hu/",
+    "homeStatus": 200,
+    "homeFinal": "https://raketa.hu/",
+    "candidates": [
+      "https://raketa.hu/2026-fizikai-nobel-francis-halzen-neutrino-deli-sark-jeg-icecube",
+      "https://raketa.hu/217-eves-titkositott-level-napoleon-astra-ai-modell-feltores",
+      "https://raketa.hu/1500-fokos-jeg-foldfelszini-nyomas-ketmillioszorosa",
+      "https://raketa.hu/hun-ren-okologiai-kozpont-macskapreda-adatgyujtes",
+      "https://raketa.hu/openai-chatgpt-lathatatlan-jeloles-vizjel-europa",
+      "https://raketa.hu/betort-koponyak-emberaldozat-egyiptom-temetkezes"
+    ],
+    "article": {
+      "url": "https://raketa.hu/2026-fizikai-nobel-francis-halzen-neutrino-deli-sark-jeg-icecube",
+      "status": 200,
+      "finalUrl": "https://raketa.hu/2026-fizikai-nobel-francis-halzen-neutrino-deli-sark-jeg-icecube",
+      "bytes": 38088,
+      "ogType": "article",
+      "jsonLdTypes": [
+        "BreadcrumbList",
+        "NewsArticle"
+      ],
+      "canonical": "https://raketa.hu/2026-fizikai-nobel-francis-halzen-neutrino-deli-sark-jeg-icecube",
+      "canonicalMatchesUrl": true,
+      "tags": {
+        "article": 0,
+        "main": 0,
+        "footer": 1,
+        "h1": 2,
+        "time": 0
+      },
+      "articleClasses": [],
+      "hasCommentsContainer": false,
+      "cspPresent": false,
+      "cspScriptSrc": "",
+      "cspBlocksDisqus": false,
+      "poweredBy": "cloudflare",
+      "consentOrPaywall": [],
+      "frameworks": [],
+      "title": "A világűr szellemrészecskéinek titkait kezdte el kutatni a Déli-sark jegében a fizikai Nobel-díj 2026-os nyertese - Rake"
+    }
+  },
+  {
+    "slug": "g7",
+    "title": "G7",
+    "home": "https://g7.hu/",
+    "homeStatus": 200,
+    "homeFinal": "https://telex.hu/g7",
+    "candidates": [],
+    "article": null
+  },
+  {
+    "slug": "valaszonline",
+    "title": "Válasz Online",
+    "home": "https://www.valaszonline.hu/",
+    "homeStatus": 200,
+    "homeFinal": "https://www.valaszonline.hu/",
+    "candidates": [
+      "https://www.valaszonline.hu/2026/10/07/magyarorszag-ukrajna-diplomacia-magyar-peter-zelenszkij-karpatalja-hatter/",
+      "https://www.valaszonline.hu/2026/10/06/segelyek-szocialis-szegeny-tamogatas-maltai-fete-civilek/",
+      "https://www.valaszonline.hu/2026/10/06/hanko-balazs-ima-osztie-zoltan-fidesz-ner-egyhaz-velemeny/",
+      "https://www.valaszonline.hu/2026/10/05/silverana-noemi-transznemuseg-politika-identitas-interju/",
+      "https://www.valaszonline.hu/2026/10/05/protekcio-halapenz-maganegeszsgugy/",
+      "https://www.valaszonline.hu/2026/10/01/hanko-balazs-sesztak-miklos-elszamoltatas-ugyeszseg-valasz-podcast/"
+    ],
+    "article": {
+      "url": "https://www.valaszonline.hu/2026/10/07/magyarorszag-ukrajna-diplomacia-magyar-peter-zelenszkij-karpatalja-hatter/",
+      "status": 200,
+      "finalUrl": "https://www.valaszonline.hu/2026/10/07/magyarorszag-ukrajna-diplomacia-magyar-peter-zelenszkij-karpatalja-hatter/",
+      "bytes": 54702,
+      "ogType": "article",
+      "jsonLdTypes": [],
+      "canonical": "../../../../2026/10/07/magyarorszag-ukrajna-diplomacia-magyar-peter-zelenszkij-karpatalja-hatter/",
+      "canonicalMatchesUrl": false,
+      "tags": {
+        "article": 1,
+        "main": 0,
+        "footer": 0,
+        "h1": 1,
+        "time": 0
+      },
+      "articleClasses": [
+        "single-article"
+      ],
+      "hasCommentsContainer": false,
+      "cspPresent": false,
+      "cspScriptSrc": "",
+      "cspBlocksDisqus": false,
+      "poweredBy": "cloudflare",
+      "consentOrPaywall": [],
+      "frameworks": [
+        "wp-content"
+      ],
+      "title": "„Zelenszkij elnök dühös volt” – így értette félre egymást Magyarország és Ukrajna – Válasz Online"
+    }
+  },
+  {
+    "slug": "klubradio",
+    "title": "Klubrádió",
+    "home": "https://www.klubradio.hu/",
+    "homeStatus": 200,
+    "homeFinal": "https://www.klubradio.hu/",
+    "candidates": [
+      "https://www.klubradio.hu/hirek/a-fogva-tartas-jogi-lyukat-probalhattak-betomni-az-aranykonvoj-ugyben-164394"
+    ],
+    "article": {
+      "url": "https://www.klubradio.hu/hirek/a-fogva-tartas-jogi-lyukat-probalhattak-betomni-az-aranykonvoj-ugyben-164394",
+      "status": 200,
+      "finalUrl": "https://www.klubradio.hu/hirek/a-fogva-tartas-jogi-lyukat-probalhattak-betomni-az-aranykonvoj-ugyben-164394",
+      "bytes": 50435,
+      "ogType": "article",
+      "jsonLdTypes": [],
+      "canonical": null,
+      "canonicalMatchesUrl": false,
+      "tags": {
+        "article": 13,
+        "main": 0,
+        "footer": 1,
+        "h1": 1,
+        "time": 0
+      },
+      "articleClasses": [
+        "col-lg-3",
+        "col-lg-3",
+        "col-lg-3"
+      ],
+      "hasCommentsContainer": false,
+      "cspPresent": false,
+      "cspScriptSrc": "",
+      "cspBlocksDisqus": false,
+      "poweredBy": null,
+      "consentOrPaywall": [],
+      "frameworks": [],
+      "title": "A fogva tartás jogi „lyukát” próbálhatták betömni az aranykonvoj-ügyben  | Klubrádió"
+    }
+  },
+  {
+    "slug": "nepszava",
+    "title": "Népszava",
+    "home": "https://nepszava.hu/",
+    "homeStatus": 200,
+    "homeFinal": "https://nepszava.hu/",
+    "candidates": [
+      "https://nepszava.hu/3334283_kaprinyak-tibor-gajdos-laszlo-vadaszat-tisza-part",
+      "https://nepszava.hu/3334221_izrael-megemlekezes-2023-oktober-7-netanjahu-beszed",
+      "https://nepszava.hu/3334320_operahaz-atvilagitas-okovacs-szilveszter-kossuth-radio"
+    ],
+    "article": {
+      "url": "https://nepszava.hu/3334283_kaprinyak-tibor-gajdos-laszlo-vadaszat-tisza-part",
+      "status": 200,
+      "finalUrl": "https://nepszava.hu/3334283_kaprinyak-tibor-gajdos-laszlo-vadaszat-tisza-part",
+      "bytes": 40583,
+      "ogType": "article",
+      "jsonLdTypes": [
+        "BreadcrumbList",
+        "NewsArticle"
+      ],
+      "canonical": "https://nepszava.hu/3334283_kaprinyak-tibor-gajdos-laszlo-vadaszat-tisza-part",
+      "canonicalMatchesUrl": true,
+      "tags": {
+        "article": 0,
+        "main": 0,
+        "footer": 0,
+        "h1": 1,
+        "time": 0
+      },
+      "articleClasses": [],
+      "hasCommentsContainer": false,
+      "cspPresent": true,
+      "cspScriptSrc": "script-src * 'unsafe-inline' 'unsafe-eval'",
+      "cspBlocksDisqus": false,
+      "poweredBy": "cloudflare",
+      "consentOrPaywall": [],
+      "frameworks": [],
+      "title": "Oroszlánok a szekrényből"
+    }
+  },
+  {
+    "slug": "mfor",
+    "title": "Menedzsment Fórum",
+    "home": "https://mfor.hu/",
+    "homeStatus": 200,
+    "homeFinal": "https://mfor.hu/",
+    "candidates": [
+      "https://mfor.hu/cikkek/szemelyes_penzugyek.html",
+      "https://mfor.hu/cikkek/kulpolitika/koszonetet-mondott-ukrajna-magyarorszagnak-orban-anitat-kulon-megemlitettek.html",
+      "https://mfor.hu/cikkek/kozerdeku/vegre-eltunhetnek-az-azbesztes-utak-szombathelyrol-elarultak-mennyit-kell-ra-varni.html",
+      "https://mfor.hu/cikkek/kozerdeku/meglepo-eredmeny-ketharmad-alakult-ki-az-olimpiai-rendezes-korul.html",
+      "https://mfor.hu/cikkek/makro/lassan-lezarul-a-gigantikus-europai-projekt-magyarorszag-az-utolso-pillanatokban-slisszant-be-az-ajton.html",
+      "https://mfor.hu/cikkek/oktatas/iden-a-parlament-ele-kerulnek-a-gyermekvedelmi-jogszabaly-modositasai--jelentette-be-gyurko-szilvia.html"
+    ],
+    "article": {
+      "url": "https://mfor.hu/cikkek/kulpolitika/koszonetet-mondott-ukrajna-magyarorszagnak-orban-anitat-kulon-megemlitettek.html",
+      "status": 200,
+      "finalUrl": "https://mfor.hu/cikkek/kulpolitika/koszonetet-mondott-ukrajna-magyarorszagnak-orban-anitat-kulon-megemlitettek.html",
+      "bytes": 100459,
+      "ogType": "article",
+      "jsonLdTypes": [
+        "NewsArticle"
+      ],
+      "canonical": "https://mfor.hu/cikkek/kulpolitika/koszonetet-mondott-ukrajna-magyarorszagnak-orban-anitat-kulon-megemlitettek.html",
+      "canonicalMatchesUrl": true,
+      "tags": {
+        "article": 1,
+        "main": 0,
+        "footer": 1,
+        "h1": 1,
+        "time": 1
+      },
+      "articleClasses": [
+        "news-page-article"
+      ],
+      "hasCommentsContainer": false,
+      "cspPresent": false,
+      "cspScriptSrc": "",
+      "cspBlocksDisqus": false,
+      "poweredBy": "cloudflare",
+      "consentOrPaywall": [],
+      "frameworks": [
+        "wp-content"
+      ],
+      "title": "Köszönetet mondott Ukrajna Magyarországnak, Orbán Anitát külön megemlítették - mfor.hu"
+    }
+  },
+  {
+    "slug": "atlatszo",
+    "title": "Átlátszó",
+    "home": "https://atlatszo.hu/",
+    "homeStatus": 200,
+    "homeFinal": "https://atlatszo.hu/",
+    "candidates": [
+      "https://atlatszo.hu/cdn-cgi/l/email-protection",
+      "https://atlatszo.hu/tudoleaks-szivarogtass-az-akademiai-dolgozok-forumanak-es-az-atlatszonak/",
+      "https://atlatszo.hu/kozpenz/2026/10/07/a-fidesz-kemenymagjahoz-vezethet-az-alapjogokert-kozpont-ugyeben-zajlo-nyomozas/",
+      "https://atlatszo.hu/impakt/2026/10/07/vasuti-kozlekedes-veszelyeztetesenek-gyanuja-miatt-nyomoz-a-rendorseg-a-tervek-nelkuli-agyazatragasztas-miatt/",
+      "https://atlatszo.hu/orszagszerte/2026/10/06/evtizedek-ota-szennyez-nyergesujfalun-az-egykori-gyar-azbesztes-hulladeka/",
+      "https://atlatszo.hu/kozpenz/2026/10/05/meszaros-lorinc-2024-ben-mar-harom-luxusjet-vegso-tulajdonosa-volt/"
+    ],
+    "article": {
+      "url": "https://atlatszo.hu/tudoleaks-szivarogtass-az-akademiai-dolgozok-forumanak-es-az-atlatszonak/",
+      "status": 200,
+      "finalUrl": "https://atlatszo.hu/tudoleaks-szivarogtass-az-akademiai-dolgozok-forumanak-es-az-atlatszonak/",
+      "bytes": 105033,
+      "ogType": "article",
+      "jsonLdTypes": [
+        "BreadcrumbList",
+        "ImageObject",
+        "Organization",
+        "ReadAction",
+        "SearchAction",
+        "WebPage",
+        "WebSite"
+      ],
+      "canonical": "https://atlatszo.hu/tudoleaks-szivarogtass-az-akademiai-dolgozok-forumanak-es-az-atlatszonak/",
+      "canonicalMatchesUrl": true,
+      "tags": {
+        "article": 10,
+        "main": 1,
+        "footer": 1,
+        "h1": 1,
+        "time": 0
+      },
+      "articleClasses": [
+        "post",
+        "post",
+        "post"
+      ],
+      "hasCommentsContainer": false,
+      "cspPresent": false,
+      "cspScriptSrc": "",
+      "cspBlocksDisqus": false,
+      "poweredBy": "cloudflare",
+      "consentOrPaywall": [
+        "quantcast"
+      ],
+      "frameworks": [
+        "wp-content"
+      ],
+      "title": "TudoLeaks – szivárogtass az Akadémiai Dolgozók Fórumának és az Átlátszónak! | atlatszo.hu"
+    }
+  },
+  {
+    "slug": "kontroll",
+    "title": "Kontroll",
+    "home": "https://kontroll.hu/",
+    "homeStatus": 200,
+    "homeFinal": "https://kontroll.hu/",
+    "candidates": [
+      "https://kontroll.hu/cikk/belfold/2026/10/07/csaszar-attila-szerint-politikai-leszamolas-aldozata-lett-a-koezmediabol-valo-eltavolitasaval"
+    ],
+    "article": {
+      "url": "https://kontroll.hu/cikk/belfold/2026/10/07/csaszar-attila-szerint-politikai-leszamolas-aldozata-lett-a-koezmediabol-valo-eltavolitasaval",
+      "status": 200,
+      "finalUrl": "https://kontroll.hu/cikk/belfold/2026/10/07/csaszar-attila-szerint-politikai-leszamolas-aldozata-lett-a-koezmediabol-valo-eltavolitasaval",
+      "bytes": 209090,
+      "ogType": "article",
+      "jsonLdTypes": [],
+      "canonical": "https://kontroll.hu/cikk/belfold/2026/10/07/csaszar-attila-szerint-politikai-leszamolas-aldozata-lett-a-koezmediabol-valo-eltavolitasaval",
+      "canonicalMatchesUrl": true,
+      "tags": {
+        "article": 0,
+        "main": 1,
+        "footer": 1,
+        "h1": 1,
+        "time": 0
+      },
+      "articleClasses": [],
+      "hasCommentsContainer": false,
+      "cspPresent": false,
+      "cspScriptSrc": "",
+      "cspBlocksDisqus": false,
+      "poweredBy": "Next.js",
+      "consentOrPaywall": [
+        "cookiebot"
+      ],
+      "frameworks": [],
+      "title": "Kontroll: Császár Attila szerint politikai leszámolás áldozata..."
+    }
+  },
+  {
+    "slug": "amerikainepszava",
+    "title": "Amerikai Népszava",
+    "home": "https://nepszava.us/",
+    "homeStatus": 200,
+    "homeFinal": "https://nepszava.us/",
+    "candidates": [
+      "https://nepszava.us/cikk/bartus-laszlo-magyar-peter-gonzo-kormanyzasa/"
+    ],
+    "article": {
+      "url": "https://nepszava.us/cikk/bartus-laszlo-magyar-peter-gonzo-kormanyzasa/",
+      "status": 200,
+      "finalUrl": "https://nepszava.us/belepes/",
+      "bytes": 1446,
+      "ogType": null,
+      "jsonLdTypes": [],
+      "canonical": null,
+      "canonicalMatchesUrl": false,
+      "tags": {
+        "article": 0,
+        "main": 1,
+        "footer": 0,
+        "h1": 1,
+        "time": 0
+      },
+      "articleClasses": [],
+      "hasCommentsContainer": false,
+      "cspPresent": true,
+      "cspScriptSrc": "script-src 'self'",
+      "cspBlocksDisqus": true,
+      "poweredBy": "nginx/1.24.0 (Ubuntu)",
+      "consentOrPaywall": [],
+      "frameworks": [],
+      "title": "Belépés a szerkesztőségbe · Amerikai Népszava"
+    }
+  }
+]
