@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       QUALITY_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
@@ -22,39 +21,56 @@ jobs:
           fi
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
         with:
-          python-version: '3.13'
+          python-version: "3.13"
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
-          node-version: '24'
+          node-version: "24"
       - name: Install lockfile-verified lint tools without package scripts
         run: npm ci --prefix .github/ci/node-tools --ignore-scripts --no-audit --no-fund
       - name: Block new JavaScript defects
         run: python .github/ci/lint_baseline.py eslint "$PWD/.github/ci/node-tools/node_modules/.bin/eslint" --config "$PWD/eslint.config.mjs" --format json '*.js'
       - name: JavaScript syntax
         run: for file in *.js; do node --check "$file"; done
-      - name: Unit tests with coverage
+      - name: Unit and frontend module tests with coverage
         run: |
-          mkdir -p coverage
-          node --test --experimental-test-coverage \
-            --test-coverage-include=444hu_comments.js \
-            --test-coverage-lines=85 \
-            --test-coverage-functions=80 \
-            --test-coverage-branches=75 \
-            --test-reporter=spec \
-            --test-reporter-destination=stdout \
-            --test-reporter=lcov \
-            --test-reporter-destination=coverage/lcov.info \
-            tests/*.test.mjs
+          .github/ci/node-tools/node_modules/.bin/c8 \
+            --all --include='444hu_comments*.js' \
+            --check-coverage --per-file --lines=85 --functions=80 --branches=75 \
+            --reporter=text --reporter=lcov \
+            node --experimental-vm-modules --test tests/*.test.mjs
           test -s coverage/lcov.info
-      - name: Prettier diagnostics (initial baseline report)
-        continue-on-error: true
+      - name: CI utility tests
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Upload coverage reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: coverage
+          path: coverage/
+          if-no-files-found: error
+      - name: Enforce extension formatting
         run: .github/ci/node-tools/node_modules/.bin/prettier --check '*.js' '*.css' manifest.json
       - name: Validate manifest and package extension
         run: python .github/ci/package_extension.py
+      - name: Check SonarQube Cloud availability
+        id: sonar
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          if [ -n "$SONAR_TOKEN" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::SonarQube Cloud skipped: SONAR_TOKEN is unavailable"
+          fi
       - name: SonarQube Cloud analysis
-        if: (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) && env.SONAR_TOKEN != ''
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        if: (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) && steps.sonar.outputs.enabled == 'true'
+        with:
+          args: -Dsonar.qualitygate.wait=true
         uses: SonarSource/sonarqube-scan-action@d209202bc7d53ff1cc128f7f907dac145c9d6ae9 # v8.3.0
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: chrome-extension
           path: dist/444hu_comments.zip
+          if-no-files-found: error

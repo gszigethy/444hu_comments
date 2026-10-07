@@ -8,31 +8,19 @@ var lastUrl444hsz = null;
   let app, router;
 
   function waitForRouter() {
-    app = new requirejs("n3/app").default.NAMESPACES.filter((n) => {
-      return n.name === "n3";
-    })[0];
-
     try {
-      router = app.__container__.lookup("router:main");
-      if (router.currentRouteName != null) {
+      app = new requirejs("n3/app").default.NAMESPACES.find(
+        (namespace) => namespace.name === "n3",
+      );
+      router = app?.__container__.lookup("router:main");
+      if (router?.currentRouteName != null) {
         start444hsz();
-      } else {
-        throw new Error("router not ready");
+        return;
       }
     } catch (error) {
-      setTimeout(waitForRouter, 200);
+      // The page's loader and application may become available after injection.
     }
-
-    if (app) {
-      router = app.__container__.lookup("router:main");
-      if (router.currentRouteName != null) {
-        start444hsz();
-      } else {
-        setTimeout(waitForRouter, 200);
-      }
-    } else {
-      setTimeout(waitForRouter, 200);
-    }
+    setTimeout(waitForRouter, 200);
   }
 
   waitForRouter();
@@ -44,6 +32,8 @@ var lastUrl444hsz = null;
       _commentsSectionInsertMethod = 0,
       _commentsLoaded = false,
       _commentsSectionLoadRetries,
+      _initTimer,
+      _initGeneration = 0,
       _commentsButtonTopEl = null,
       _defaultForumShortName = "444hu",
       _defaultUserForumShortName = "444hsz",
@@ -191,12 +181,12 @@ var lastUrl444hsz = null;
     function scrollToHash() {
       if (window.location.hash.startsWith("#comment")) {
         document.querySelector(".comments-toggle").click();
-        document.getElementById("comments").scrollIntoView();
+        document.getElementById("comments_wrapper").scrollIntoView();
       }
     }
 
     function getDisqusUrl() {
-      let url = document.URL.split("?")[0];
+      let url = document.URL.split(/[?#]/)[0];
       if (pageIsFociArticle()) {
         let d =
           router.get("currentRoute.params.year") +
@@ -271,6 +261,14 @@ var lastUrl444hsz = null;
       }
 
       _commentsLoaded = false;
+    }
+
+    function validForumShortname(value) {
+      const shortname = (value || "").trim().toLowerCase();
+      // A pasted or stored value must remain a single Disqus subdomain.
+      return /^[a-z0-9-]+$/.test(shortname)
+        ? shortname
+        : _defaultUserForumShortName;
     }
 
     function initButtons() {
@@ -475,9 +473,11 @@ var lastUrl444hsz = null;
       }
 
       function onChangeUserForumShortname() {
-        _userForumShortName = this.value
-          ? this.value
-          : _defaultUserForumShortName;
+        _userForumShortName = validForumShortname(this.value);
+        this.value =
+          _userForumShortName === _defaultUserForumShortName
+            ? ""
+            : _userForumShortName;
         storeSetting("_444hsz_user_forum_shortname", _userForumShortName);
       }
 
@@ -550,8 +550,11 @@ var lastUrl444hsz = null;
     }
 
     function applySettings() {
+      _userForumShortName = _defaultUserForumShortName;
       if (loadSetting("_444hsz_user_forum_shortname")) {
-        _userForumShortName = loadSetting("_444hsz_user_forum_shortname");
+        _userForumShortName = validForumShortname(
+          loadSetting("_444hsz_user_forum_shortname"),
+        );
         if (["444hsz3", "444hsz2", "negy"].includes(_userForumShortName)) {
           _userForumShortName = _defaultUserForumShortName;
         }
@@ -577,8 +580,8 @@ var lastUrl444hsz = null;
           if (!_useTempUserForum) {
             unloadDisqus();
             _useTempUserForum = true;
-            _userForumShortName = _tempUserForumShortName;
           }
+          _userForumShortName = _tempUserForumShortName;
           log("Article uses temporary forum");
         } else {
           if (_useTempUserForum) {
@@ -778,9 +781,11 @@ var lastUrl444hsz = null;
       log("Dark mode: " + _darkMode);
     }
 
-    async function init() {
+    async function init(generation) {
+      const isArticle = await pageIsArticle();
+      if (generation !== _initGeneration) return;
       console.group("%c[444hsz]", "color: #29af0a;", "log");
-      if (await pageIsArticle()) {
+      if (isArticle) {
         if (reset()) {
           initDarkMode();
           initCommentsSection();
@@ -804,9 +809,7 @@ var lastUrl444hsz = null;
           if (_commentsSectionLoadRetries > 0) {
             _commentsSectionLoadRetries--;
             log("Retries left: " + _commentsSectionLoadRetries);
-            setTimeout(() => {
-              init();
-            }, 500);
+            scheduleInit(generation, 500);
           }
         }
       } else {
@@ -822,11 +825,19 @@ var lastUrl444hsz = null;
       startInit();
     }
 
+    function scheduleInit(generation, delay) {
+      _initTimer = setTimeout(() => {
+        void init(generation).catch((error) => {
+          console.groupEnd();
+          console.error("[444hsz] Initialization failed", error);
+        });
+      }, delay);
+    }
+
     function startInit() {
+      clearTimeout(_initTimer);
       _commentsSectionLoadRetries = 10;
-      setTimeout(() => {
-        init();
-      }, 1000);
+      scheduleInit(++_initGeneration, 1000);
     }
 
     // when page is rendered by backend (on first pageload)
