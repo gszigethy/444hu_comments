@@ -1,8 +1,10 @@
-# 444hsz – böngészőbővítmény a 444.hu kommentjeihez
+# 444hsz – böngészőbővítmény a 444.hu és más oldalak kommentjeihez
 
 A **444hsz** egy nem hivatalos böngészőbővítmény, amely a [444.hu](https://444.hu)
-cikkei alá visszahozza a kommentelés lehetőségét egy [Disqus](https://disqus.com)
-fórum beágyazásával. A bővítmény eredeti szerzője **nerblock**; ez a repó az
+és a [444hsz.com](https://444hsz.com) által támogatott további oldalak (Telex,
+Qubit, 24.hu stb., lásd a [listát](docs/tamogatott-oldalak.md)) cikkei alá
+visszahozza a kommentelés lehetőségét egy [Disqus](https://disqus.com) fórum
+beágyazásával. A bővítmény eredeti szerzője **nerblock**; ez a repó az
 eredeti, jelenleg gazdátlan projekt továbbfejlesztett forkja.
 
 > **Szolgálati közlemény (a bővítmény saját szövege alapján):** a 444 2023
@@ -67,6 +69,8 @@ a Disqus saját adatkezelési szabályai vonatkoznak.
 ## Dokumentáció
 
 - [Használati útmutató](docs/hasznalat.md)
+- [Támogatott oldalak](docs/tamogatott-oldalak.md) – a lista, a kizárt oldalak és az adatvédelem oldalanként
+- [Kézi tesztlista](docs/kezi-teszt.md) – kiadás előtti ellenőrzés böngészőkben
 - [Fejlesztői dokumentáció](docs/fejlesztoi-dokumentacio.md) – felépítés,
   tesztelés, CI, ismert korlátok
 - [Auditjelentés (2026-10-07, angol)](.github/AUDIT-2026-10-07.md) és a
