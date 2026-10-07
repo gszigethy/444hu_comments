@@ -15,7 +15,6 @@
     "geekz.444.hu": {
       comments_section_html: getCommentsInnerHTMLGeekz(),
       init_script: function () {
-        require("blog/comment").default();
         let cd = document.querySelector("meta[itemprop='dateCreated']");
         if (
           null !== cd &&
@@ -25,6 +24,7 @@
         } else {
           window.disqus_shortname = "444hsz";
         }
+        require("blog/comment").default();
       },
     },
   };
@@ -191,7 +191,7 @@
           .parseFromString(getConfig("comments_section_html"), `text/html`)
           .getElementsByTagName(`body`)[0].children;
         let cel = document.getElementById("comments");
-        cel.innerText = "";
+        cel.textContent = "";
         cel.append(...tmp);
         tmp = null;
       } else {
