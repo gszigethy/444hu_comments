@@ -85,6 +85,23 @@ A blokk tetején lévő fülekkel lehet választani:
 A **Kommentek mutatása** gombra kattintva töltődik be a Disqus. Az utoljára
 használt fület a bővítmény megjegyzi.
 
+### A komment blokk a 444.hu-n kívüli oldalakon
+
+A többi támogatott oldalon (Telex, 24.hu, Népszava stb.) a cikk szövege alatt
+egy egyszerű **Hozzászólások** blokk jelenik meg, a **444hsz** fórummal. A
+**Kommentek mutatása** gombra töltődik be a Disqus; a **Kommentek automatikus
+betöltése** jelölőnégyzettel ez minden cikknél magától megtörténik (a választás
+oldalanként megmarad). Főoldalakon, rovatoldalakon nem jelenik meg a blokk.
+
+Ha egy oldal a cikkek között lapozás közben nem tölt újra (Telex,
+Transtelex), a bővítmény a címváltozást követi, és az új cikkhez újra beteszi
+a blokkot.
+
+Korlátok: ezeken az oldalakon nincs oldalsáv és nincs külön „hivatalos
+fórum” fül, és a saját Disqus fórum megadása sem érhető el; csak a 444hsz fórum
+használható. Ha a blokk nem jelenik meg, ellenőrizd a beállítások oldalon, hogy
+az oldal be van-e kapcsolva, és lásd a Hibaelhárítást.
+
 ### 3. Frissítés régebbi verzióról
 
 Az 1.4.x verziókról frissítve a 444.hu hozzáférése általában megmarad, és a
@@ -120,6 +137,9 @@ automatikusan betölti a kommenteket és a blokkhoz görget.
   hogy az oldal be van-e kapcsolva. A 444 sablonja változhat; a bővítmény
   ilyenkor többször újrapróbálkozik, majd feladja. Frissíts az oldalra, és
   nézd meg a böngésző konzolját (`[444hsz]` előtagú üzenetek).
+- **Üres vagy hibás Disqus (nem 444.hu oldalon):** a 444hsz fórum üzemeltetőinek is
+  engedélyeznie kell az adott oldalt a Disqus „trusted domains” beállításában;
+  ha csak egy oldalon marad üres a blokk, jelezd a hibabejelentőben.
 - **Üres vagy hibás Disqus:** ellenőrizd, hogy a tartalomblokkoló nem tiltja-e a
   `*.disqus.com` címeket, és hogy a saját fórum neve helyes-e.
 - **Régi cikkek:** a 2021. június 9. előtti foci cikkek a régi

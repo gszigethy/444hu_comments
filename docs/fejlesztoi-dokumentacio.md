@@ -12,7 +12,8 @@ Manifest V3 bővítmény, build lépés nélkül (nincs csomagoló vagy transpil
 | `background.js` | Service worker (Chrome) / event page (Firefox): a megadott engedélyek alapján regisztrálja a content scripteket, telepítéskor/frissítéskor megnyitja a beállításokat |
 | `options.html`, `options.js`, `options.css` | Beállítások oldal: oldalankénti kapcsoló (`permissions.request/remove`), „Mind be/ki”, magyarázó súgó |
 | `444hsz_import.js` | A 444hsz.com `settingsData.articleFeed.filters.sites` szűrőjének kiolvasása és értelmezése (a kiolvasás `scripting.executeScript`-tel egy 444hsz.com fülben történik, az engedélyt a végén visszavonja) |
-| `444hsz_multisite.js` | A 444.hu-n kívüli oldalak content scriptje (egyelőre csak jelez a konzolon) |
+| `444hsz_multisite.js`, `444hsz_multisite.css` | A 444.hu-n kívüli oldalak content scriptje (izolált világban): cikkfelismerés, beszúrás a felderítés szabályai szerint, a blokk felépítése, SPA-követés (a cím 1 s-onkénti figyelése) |
+| `444hsz_multisite_inject.js` | A lap saját kontextusában fut (web-accessible): a `444hsz:load` eseményre beállítja a Disqus globálisait (`disqus_url`, `disqus_config` csak `url`+`title`, azonosító nélkül), betölti az `embed.js`-t, betöltött Disqus esetén `DISQUS.reset`-et hív |
 | `444hu_comments.js` | Content script: `DOMContentLoaded` után a hoszt alapján kiválasztja a frontendet, és `<script type=module>`/`<link>` elemekkel beinjektálja az erőforrásokat; meta-elemekben átadja a bővítmény URL-jét és verzióját |
 | `444hu_comments_inject.js` | Az új (Ember alapú) 444.hu frontend modulja: megvárja a `n3/app` útválasztót, minden cikkoldalnál beszúrja a komment blokkot és a felső gombot, kezeli a beállításokat és a Disqus betöltését |
 | `444hu_comments_inject_legacy.js` | A régi blogmotor (aldomainek, pl. `jo.`, `geekz.`) támogatása |

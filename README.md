@@ -76,8 +76,8 @@ a Disqus saját adatkezelési szabályai vonatkoznak.
 
 ```sh
 npm ci --prefix .github/ci/node-tools --ignore-scripts --no-audit --no-fund
-.github/ci/node-tools/node_modules/.bin/c8 --all --include='444hu_comments*.js' --include='444hsz_sites.js' \
-  --include='background.js' --include='options.js' --include='444hsz_multisite.js' \
+.github/ci/node-tools/node_modules/.bin/c8 --all --include='444hu_comments*.js' --include='444hsz_*.js' \
+  --include='background.js' --include='options.js' \
   --check-coverage --per-file --lines=85 --functions=80 --branches=75 \
   node --experimental-vm-modules --test tests/*.test.mjs
 python3 -m unittest discover -s tests -p 'test_*.py' -v

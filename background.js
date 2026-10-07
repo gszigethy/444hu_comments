@@ -57,6 +57,7 @@
           return entry[1];
         }),
         js: ["444hsz_sites.js", "444hsz_multisite.js"],
+        css: ["444hsz_multisite.css"],
         runAt: "document_idle",
       });
     }
