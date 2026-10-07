@@ -5,15 +5,40 @@
   "manifest_version": 3,
   "author": "nerblock",
   "description": "Kommenteld szabadon a 444.hu cikkeit!",
-  "host_permissions": ["*://*.444.hu/*"],
-  "content_scripts": [
-    {
-      "matches": ["http://*.444.hu/*", "https://*.444.hu/*"],
-      "exclude_matches": ["*://kor.444.hu/*", "*://membership.444.hu/*"],
-      "js": ["444hu_comments.js"],
-      "run_at": "document_start"
-    }
+  "permissions": ["scripting"],
+  "optional_host_permissions": [
+    "*://*.24.hu/*",
+    "*://*.444.hu/*",
+    "*://*.forbes.hu/*",
+    "*://*.g7.hu/*",
+    "*://*.hang.hu/*",
+    "*://*.magyarnarancs.hu/*",
+    "*://*.media1.hu/*",
+    "*://*.merce.hu/*",
+    "*://*.raketa.hu/*",
+    "*://*.theguardian.com/*",
+    "*://atlatszo.hu/*",
+    "*://kontroll.hu/*",
+    "*://mfor.hu/*",
+    "*://nepszava.hu/*",
+    "*://nepszava.us/*",
+    "*://qubit.hu/*",
+    "*://rtl.hu/*",
+    "*://telex.hu/*",
+    "*://transtelex.ro/*",
+    "*://www.klubradio.hu/*",
+    "*://www.lakmusz.hu/*",
+    "*://www.szabadeuropa.hu/*",
+    "*://www.valaszonline.hu/*"
   ],
+  "background": {
+    "service_worker": "background.js",
+    "scripts": ["444hsz_sites.js", "background.js"]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
   "web_accessible_resources": [
     {
       "resources": [
@@ -24,9 +49,34 @@
         "444hu_comments_legacy.css",
         "images/444hsz.svg",
         "images/view_sidebar_black_24dp.svg",
-        "images/settings_black_24dp.svg"
+        "images/settings_black_24dp.svg",
+        "sites.json"
       ],
-      "matches": ["*://*.444.hu/*"]
+      "matches": [
+        "*://*.24.hu/*",
+        "*://*.444.hu/*",
+        "*://*.forbes.hu/*",
+        "*://*.g7.hu/*",
+        "*://*.hang.hu/*",
+        "*://*.magyarnarancs.hu/*",
+        "*://*.media1.hu/*",
+        "*://*.merce.hu/*",
+        "*://*.raketa.hu/*",
+        "*://*.theguardian.com/*",
+        "*://atlatszo.hu/*",
+        "*://kontroll.hu/*",
+        "*://mfor.hu/*",
+        "*://nepszava.hu/*",
+        "*://nepszava.us/*",
+        "*://qubit.hu/*",
+        "*://rtl.hu/*",
+        "*://telex.hu/*",
+        "*://transtelex.ro/*",
+        "*://www.klubradio.hu/*",
+        "*://www.lakmusz.hu/*",
+        "*://www.szabadeuropa.hu/*",
+        "*://www.valaszonline.hu/*"
+      ]
     }
   ],
   "action": {
@@ -36,7 +86,8 @@
       "24": "images/icon24.png",
       "32": "images/icon32.png",
       "38": "images/icon38.png"
-    }
+    },
+    "default_title": "444hsz – beállítások"
   },
   "icons": {
     "16": "images/icon16.png",

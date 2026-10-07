@@ -24,6 +24,12 @@ eredeti, jelenleg gazdátlan projekt továbbfejlesztett forkja.
 - Külön „Kommentek” gomb a cikk tetején, `#comment…` hivatkozások támogatása.
 - Működik a 444.hu aldomainjein (blogok, pl. `jo.444.hu`, `geekz.444.hu`) is.
   A `membership.444.hu` és a `kor.444.hu` oldalakon a bővítmény **nem fut**.
+- **Oldalankénti bekapcsolás:** a bővítmény telepítés után sehol sem fut. A
+  beállítások oldalon (az eszköztár-ikonra kattintva) kapcsolhatod be azokat az
+  oldalakat, ahol kommentelni szeretnél. Bekapcsoláskor a böngésző egy
+  felugró ablakban engedélyt kér; ha véletlenül elutasítod, a
+  [használati útmutatóban](docs/hasznalat.md)
+  megtalálod a helyreállítás lépéseit.
 
 ## Telepítés
 
@@ -51,8 +57,9 @@ Telepíthető ZIP is készíthető: `python3 .github/ci/package_extension.py`
 
 ## Adatvédelem
 
-A bővítmény a hivatalos leírás szerint kizárólag a `444.hu` és aldomainjei
-tartalmához fér hozzá, **nem gyűjt adatot és nem tartalmaz telemetriát**.
+A bővítmény csak azokhoz az oldalakhoz fér hozzá, amelyeket te bekapcsolsz a
+beállítások oldalon (telepítés után egyik sem), **nem gyűjt adatot és nem
+tartalmaz telemetriát**. A hozzáférést bármikor visszavonhatod.
 A beállításokat a böngésző `localStorage`-ában tárolja. A kommentek betöltésekor
 viszont a böngésződ a Disqus szervereivel (`*.disqus.com`) kommunikál, amelyre
 a Disqus saját adatkezelési szabályai vonatkoznak.
@@ -69,7 +76,8 @@ a Disqus saját adatkezelési szabályai vonatkoznak.
 
 ```sh
 npm ci --prefix .github/ci/node-tools --ignore-scripts --no-audit --no-fund
-.github/ci/node-tools/node_modules/.bin/c8 --all --include='444hu_comments*.js' \
+.github/ci/node-tools/node_modules/.bin/c8 --all --include='444hu_comments*.js' --include='444hsz_sites.js' \
+  --include='background.js' --include='options.js' --include='444hsz_multisite.js' \
   --check-coverage --per-file --lines=85 --functions=80 --branches=75 \
   node --experimental-vm-modules --test tests/*.test.mjs
 python3 -m unittest discover -s tests -p 'test_*.py' -v

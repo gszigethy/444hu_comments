@@ -2,9 +2,58 @@
 
 ## Első lépések
 
-Telepítés után nyiss meg egy cikket a 444.hu-n. A cikk alján (illetve a
-sablontól függően a tartalom után) megjelenik a **Kommentek** blokk, a cikk
-tetején pedig egy **Kommentek** gomb, amely a blokkhoz görget.
+### 1. Oldalak bekapcsolása
+
+A bővítmény **telepítés után egyetlen oldalon sem fut**: te döntöd el, hol
+szeretnéd látni a kommenteket. Az első telepítéskor magától megnyílik a
+**beállítások oldal** (később a böngésző eszköztárában a 444hsz ikonra
+kattintva nyithatod meg újra).
+
+1. Kapcsold be a kívánt oldalt a kapcsolójával – kezdésnek a **444.hu** ajánlott.
+2. A böngésző **felugró ablakban engedélyt kér**: a bővítmény ilyenkor olvashatja
+   az adott oldal tartalmát, és betölti rá a 444hsz Disqus-szálat. Válaszd az
+   **engedélyezést**.
+3. Nyiss meg egy cikket az adott oldalon.
+
+A **Mind be** gombra *egyetlen* felugró ablak jelenik meg, amely az összes
+oldalt felsorolja (Chrome hosszú lista esetén összefoglalhatja). A **Mind ki**
+gomb nem kérdez semmit, és azonnal visszavonja a hozzáférést. Egy oldal
+kikapcsolása után a már megnyitott fülek a lap újratöltéséig megtartják a blokkot.
+
+A beállítások oldal soha nem tárol külön „be/ki” jelölőt: a kapcsoló a böngésző
+tényleges engedélyét mutatja, ezért ha a böngésző saját beállításaiban vonod
+vissza a hozzáférést, az itt is kikapcsoltként jelenik meg.
+
+### Mi van, ha véletlenül a „Mégse” / „Tiltás” gombra kattintottam?
+
+Ez nem rontja el a bővítményt, csak az adott oldal marad kikapcsolva.
+A bővítmény a többi, már engedélyezett oldalon változatlanul működik.
+
+1. Nyisd meg a beállítások oldalt (kattints a 444hsz ikonra az eszköztáron;
+   Chrome-ban ha nem látod, a puzzle ikon alatt tűzd ki).
+2. Az oldal kapcsolója kikapcsolva marad, és egy sárga figyelmeztetés jelenik meg.
+3. **Kapcsold be újra** ugyanazt a kapcsolót: a böngésző újra felteszi a kérdést,
+   most válaszd az engedélyezést.
+
+Ha a böngésző nem kérdez újra, vagy a kapcsoló nem tart:
+
+- **Chrome / Edge / Opera:** `chrome://extensions` (Edge-ben `edge://extensions`)
+  → 444hsz → **Részletek** → **Webhelyhozzáférés**: itt állítható, mely oldalakon
+  fér hozzá a bővítmény.
+- **Firefox:** `about:addons` → 444hsz → **Engedélyek** fül: a választható
+  webhelyhozzáférések itt kapcsolhatók.
+- Ha semmi sem segít: tiltsd le, majd engedélyezd újra a bővítményt a
+  bővítménykezelőben, vagy telepítsd újra. Beállításaid (fogaskerék ikon) nem
+  vesznek el, mert a lapok `localStorage`-ában vannak.
+
+> A felugró ablak és a bővítménykezelő pontos szövege böngészőnként és
+> verziónként eltérhet.
+
+### 2. A komment blokk
+
+Cikk megnyitásakor a cikk alján (illetve a sablontól függően a tartalom után)
+megjelenik a **Kommentek** blokk. A 444.hu-n a cikk tetején egy **Kommentek**
+gomb is megjelenik, amely a blokkhoz görget.
 
 A blokk tetején lévő fülekkel lehet választani:
 
@@ -13,6 +62,13 @@ A blokk tetején lévő fülekkel lehet választani:
 
 A **Kommentek mutatása** gombra kattintva töltődik be a Disqus. Az utoljára
 használt fület a bővítmény megjegyzi.
+
+### 3. Frissítés régebbi verzióról
+
+Az 1.4.x verziókról frissítve a 444.hu hozzáférése általában megmarad, és a
+kommentek változatlanul működnek. Ha a böngésző nem vitte át az engedélyt, a
+frissítés után megnyílik a beállítások oldal egy figyelmeztetéssel: kapcsold be
+újra a 444.hu-t.
 
 ## Beállítások (fogaskerék ikon)
 
@@ -23,7 +79,7 @@ használt fület a bővítmény megjegyzi.
 | Disqus ajánlások | A Disqus „ajánlott cikkek” blokkja; alapból rejtett. |
 | Nem hivatalos Disqus fórum | Saját fórum shortname-je. Csak kisbetű, szám és kötőjel fogadható el; üresen az alapértelmezett `444hsz` használatos. |
 
-A beállítások böngészőnként, a `444.hu` oldal `localStorage`-ában tárolódnak
+A beállítások böngészőnként, az adott oldal `localStorage`-ában tárolódnak
 (`_444hsz_*` kulcsok), ezért böngészőprofilok között nem szinkronizálódnak.
 
 ## Oldalsáv
@@ -38,7 +94,8 @@ automatikusan betölti a kommenteket és a blokkhoz görget.
 
 ## Hibaelhárítás
 
-- **Nem jelenik meg a komment blokk:** a 444 sablonja változhat; a bővítmény
+- **Nem jelenik meg a komment blokk:** először ellenőrizd a beállítások oldalon,
+  hogy az oldal be van-e kapcsolva. A 444 sablonja változhat; a bővítmény
   ilyenkor többször újrapróbálkozik, majd feladja. Frissíts az oldalra, és
   nézd meg a böngésző konzolját (`[444hsz]` előtagú üzenetek).
 - **Üres vagy hibás Disqus:** ellenőrizd, hogy a tartalomblokkoló nem tiltja-e a

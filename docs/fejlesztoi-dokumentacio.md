@@ -6,7 +6,12 @@ Manifest V3 bővítmény, build lépés nélkül (nincs csomagoló vagy transpil
 
 | Fájl | Szerep |
 | --- | --- |
-| `manifest.json` | Content script a `*.444.hu` oldalakra (`document_start`), kivéve `kor.` és `membership.` |
+| `manifest.json` | Nincs kötelező hosztengedély és nincs statikus content script: minden támogatott oldal `optional_host_permissions` (a tesztek ellenőrzik, hogy egyezik a `sites.json`-nal) |
+| `sites.json` | A 444hsz.com támogatott oldallistájának másolata (a `check_sites.py` és a napi `sites-sync` workflow figyeli) |
+| `444hsz_sites.js` | Közös oldalillesztő: hoszt/útvonal illesztés, szál-URL, cím, origin minta |
+| `background.js` | Service worker (Chrome) / event page (Firefox): a megadott engedélyek alapján regisztrálja a content scripteket, telepítéskor/frissítéskor megnyitja a beállításokat |
+| `options.html`, `options.js`, `options.css` | Beállítások oldal: oldalankénti kapcsoló (`permissions.request/remove`), „Mind be/ki”, magyarázó súgó |
+| `444hsz_multisite.js` | A 444.hu-n kívüli oldalak content scriptje (egyelőre csak jelez a konzolon) |
 | `444hu_comments.js` | Content script: `DOMContentLoaded` után a hoszt alapján kiválasztja a frontendet, és `<script type=module>`/`<link>` elemekkel beinjektálja az erőforrásokat; meta-elemekben átadja a bővítmény URL-jét és verzióját |
 | `444hu_comments_inject.js` | Az új (Ember alapú) 444.hu frontend modulja: megvárja a `n3/app` útválasztót, minden cikkoldalnál beszúrja a komment blokkot és a felső gombot, kezeli a beállításokat és a Disqus betöltését |
 | `444hu_comments_inject_legacy.js` | A régi blogmotor (aldomainek, pl. `jo.`, `geekz.`) támogatása |
@@ -17,6 +22,27 @@ Manifest V3 bővítmény, build lépés nélkül (nincs csomagoló vagy transpil
 Az injektált kód a **lap saját JS-kontextusában** fut (nem izolált világban),
 mert az Ember privát konténerét (`requirejs("n3/app")`, `router:main`) éri el.
 Ezért a `web_accessible_resources` bejegyzés szükséges.
+
+### Engedélyek és regisztráció
+
+- Az engedély maga a kapcsoló: a beállítások oldal `permissions.contains`-szel
+  olvas, nincs külön mentett állapot. A `permissions.request` csak közvetlenül a
+  kattintásból hívható, ezért a „Mind be” egyetlen hívás az összes még nem
+  engedélyezett origin-nel (egyetlen böngészőablak); a „Mind ki” egyetlen
+  `permissions.remove`, ablak nélkül.
+- A `background.js` minden indításkor és minden engedélyváltozáskor (`onAdded`,
+  `onRemoved`) újraépíti a regisztrációt: törli a sajátjait, majd a megadott
+  oldalakra regisztrálja a 444.hu bootstrapet (`kor.`/`membership.` kizárással)
+  vagy az általános scriptet. Ismert kockázat: a Chrome/Firefox
+  engedély-átvitele 1.4.x-ről **nem ellenőrzött**; a worker mindkét esetet kezeli
+  (`#frissites` figyelmeztetés).
+- A csomagoló (`package_extension.py`) a manifestben nem szereplő fájlokat is
+  felveszi: az options HTML hivatkozásait, a `background.scripts` fájlokat, a
+  worker `js: [...]` listáiban regisztrált content scripteket és a `sites.json`-t.
+- Új oldal esetén: `python .github/ci/check_sites.py --update`, majd a
+  `manifest.json` két listájának (`optional_host_permissions`,
+  `web_accessible_resources.matches`) frissítése; a `manifest.test.mjs` hibája
+  kiírja a várt listát.
 
 ### Működés röviden (modern frontend)
 
