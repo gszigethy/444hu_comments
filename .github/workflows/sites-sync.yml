@@ -1,0 +1,26 @@
+name: Sites sync
+# Opens an issue when the site list on 444hsz.com no longer matches sites.json.
+# GitHub pauses scheduled workflows after 60 days without repository activity;
+# re-enable it on the Actions tab if that happens.
+on:
+  schedule:
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: sites-sync
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.13"
+      - name: Compare the live site list with sites.json
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python .github/ci/check_sites.py
