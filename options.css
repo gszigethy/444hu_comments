@@ -1,0 +1,134 @@
+:root {
+  --bg: #fff;
+  --fg: #1c1c1c;
+  --muted: #666;
+  --line: #ddd;
+  --accent: #29af0a;
+  --warn-bg: #fff3cd;
+  --warn-fg: #664d03;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1b1b1b;
+    --fg: #eee;
+    --muted: #aaa;
+    --line: #3a3a3a;
+    --warn-bg: #3d3300;
+    --warn-fg: #ffe69c;
+  }
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font:
+    16px/1.5 system-ui,
+    sans-serif;
+}
+main {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+h1 {
+  font-size: 1.5rem;
+}
+h2 {
+  font-size: 1.1rem;
+  margin-top: 2rem;
+  color: var(--muted);
+}
+.lead {
+  color: var(--muted);
+}
+.notice,
+.message {
+  background: var(--warn-bg);
+  color: var(--warn-fg);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+}
+.toolbar {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 1rem 0;
+}
+.toolbar button {
+  font: inherit;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--fg);
+  cursor: pointer;
+}
+#summary {
+  margin-left: auto;
+  color: var(--muted);
+}
+.sites {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.site {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+}
+.swatch {
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+  flex: none;
+}
+.name {
+  font-weight: 600;
+}
+.domain,
+.reason {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.excluded .site {
+  opacity: 0.6;
+  cursor: default;
+  flex-wrap: wrap;
+}
+.help {
+  margin-top: 2rem;
+}
+.help summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+input[type="checkbox"] {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--accent);
+}
+.import {
+  margin: 1rem 0;
+}
+.import button {
+  font: inherit;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--fg);
+  cursor: pointer;
+}
+.hint {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.badge {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: var(--accent);
+}

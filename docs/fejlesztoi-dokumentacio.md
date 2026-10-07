@@ -6,7 +6,14 @@ Manifest V3 bővítmény, build lépés nélkül (nincs csomagoló vagy transpil
 
 | Fájl | Szerep |
 | --- | --- |
-| `manifest.json` | Content script a `*.444.hu` oldalakra (`document_start`), kivéve `kor.` és `membership.` |
+| `manifest.json` | Nincs kötelező hosztengedély és nincs statikus content script: minden támogatott oldal `optional_host_permissions` (a tesztek ellenőrzik, hogy egyezik a `sites.json`-nal) |
+| `sites.json` | A 444hsz.com támogatott oldallistájának másolata (a `check_sites.py` és a napi `sites-sync` workflow figyeli) |
+| `444hsz_sites.js` | Közös oldalillesztő: hoszt/útvonal illesztés, szál-URL, cím, origin minta |
+| `background.js` | Service worker (Chrome) / event page (Firefox): a megadott engedélyek alapján regisztrálja a content scripteket, telepítéskor/frissítéskor megnyitja a beállításokat |
+| `options.html`, `options.js`, `options.css` | Beállítások oldal: oldalankénti kapcsoló (`permissions.request/remove`), „Mind be/ki”, magyarázó súgó |
+| `444hsz_import.js` | A 444hsz.com `settingsData.articleFeed.filters.sites` szűrőjének kiolvasása és értelmezése (a kiolvasás `scripting.executeScript`-tel egy 444hsz.com fülben történik, az engedélyt a végén visszavonja) |
+| `444hsz_multisite.js`, `444hsz_multisite.css` | A 444.hu-n kívüli oldalak content scriptje (izolált világban): cikkfelismerés, beszúrás a felderítés szabályai szerint, a blokk felépítése, SPA-követés (a cím 1 s-onkénti figyelése) |
+| `444hsz_multisite_inject.js` | A lap saját kontextusában fut (web-accessible): a `444hsz:load` eseményre beállítja a Disqus globálisait (`disqus_url`, `disqus_config` csak `url`+`title`, azonosító nélkül), betölti az `embed.js`-t, betöltött Disqus esetén `DISQUS.reset`-et hív |
 | `444hu_comments.js` | Content script: `DOMContentLoaded` után a hoszt alapján kiválasztja a frontendet, és `<script type=module>`/`<link>` elemekkel beinjektálja az erőforrásokat; meta-elemekben átadja a bővítmény URL-jét és verzióját |
 | `444hu_comments_inject.js` | Az új (Ember alapú) 444.hu frontend modulja: megvárja a `n3/app` útválasztót, minden cikkoldalnál beszúrja a komment blokkot és a felső gombot, kezeli a beállításokat és a Disqus betöltését |
 | `444hu_comments_inject_legacy.js` | A régi blogmotor (aldomainek, pl. `jo.`, `geekz.`) támogatása |
@@ -17,6 +24,35 @@ Manifest V3 bővítmény, build lépés nélkül (nincs csomagoló vagy transpil
 Az injektált kód a **lap saját JS-kontextusában** fut (nem izolált világban),
 mert az Ember privát konténerét (`requirejs("n3/app")`, `router:main`) éri el.
 Ezért a `web_accessible_resources` bejegyzés szükséges.
+
+### Engedélyek és regisztráció
+
+- Az engedély maga a kapcsoló: a beállítások oldal `permissions.contains`-szel
+  olvas, nincs külön mentett állapot. A `permissions.request` csak közvetlenül a
+  kattintásból hívható, ezért a „Mind be” egyetlen hívás az összes még nem
+  engedélyezett origin-nel (egyetlen böngészőablak); a „Mind ki” egyetlen
+  `permissions.remove`, ablak nélkül.
+- A `background.js` minden indításkor és minden engedélyváltozáskor (`onAdded`,
+  `onRemoved`) újraépíti a regisztrációt: törli a sajátjait, majd a megadott
+  oldalakra regisztrálja a 444.hu bootstrapet (`kor.`/`membership.` kizárással)
+  vagy az általános scriptet. Ismert kockázat: a Chrome/Firefox
+  engedély-átvitele 1.4.x-ről **nem ellenőrzött**; a worker mindkét esetet kezeli
+  (`#frissites` figyelmeztetés).
+- A csomagoló (`package_extension.py`) a manifestben nem szereplő fájlokat is
+  felveszi: az options HTML hivatkozásait, a `background.scripts` fájlokat, a
+  worker `js: [...]` listáiban regisztrált content scripteket és a `sites.json`-t.
+- Új oldal esetén: `python .github/ci/check_sites.py --update`, majd a
+  `manifest.json` két listájának (`optional_host_permissions`,
+  `web_accessible_resources.matches`) frissítése; a `manifest.test.mjs` hibája
+  kiírja a várt listát.
+
+- **Import a 444hsz.com-ról:** a szűrő a 444hsz.com saját `localStorage`-ában van
+  (nem sütiben), `settingsData.articleFeed.filters.sites` a bejelölt oldalak
+  tömbje, az üres tömb „mind”. A formátum a 444hsz.com belső ügye, a szinkron
+  workflow nem figyeli, ezért az értelmező minden lépést ellenőriz, és nem
+  értelmezhető adatnál `null`-t ad. A kiolvasás csak előkijelölést ad; a
+  bekapcsolás külön kattintás, mert a felhasználói gesztus nem éli túl az
+  aszinkron fülműveleteket.
 
 ### Működés röviden (modern frontend)
 
@@ -37,6 +73,8 @@ Ezért a `web_accessible_resources` bejegyzés szükséges.
 `_444hsz_sidebar`, `_444hsz_user_forum_enabled`, `_444hsz_user_forum_shortname`,
 `_444hsz_announcement_read`, `_444hsz_autoload_comments`,
 `_444hsz_show_disqus_recommendations`.
+
+Az egyes oldalak felderítésének eredménye: [oldalak-felderites.md](oldalak-felderites.md).
 
 ## Tesztelés
 
