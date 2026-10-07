@@ -30,8 +30,8 @@ references += background.get("scripts", [])
 # `js: [...]` lists, so the manifest does not name them. Package those too.
 for worker in [background.get("service_worker")] + background.get("scripts", []):
     if worker:
-        for js_list in re.findall(r"js:\s*\[([^\]]*)\]", (root / worker).read_text()):
-            references += re.findall(r'"([^"]+\.js)"', js_list)
+        for js_list in re.findall(r"(?:js|css):\s*\[([^\]]*)\]", (root / worker).read_text()):
+            references += re.findall(r'"([^"]+\.(?:js|css))"', js_list)
 # The options page is HTML: package it together with the files it loads.
 options_page = manifest.get("options_ui", {}).get("page")
 if options_page:

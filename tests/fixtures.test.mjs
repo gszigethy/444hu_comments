@@ -35,7 +35,12 @@ test("each fixture belongs to a supported site and its recorded URL matches that
 test("fixtures are skeletons: no scripts, no inline text", () => {
   for (const name of fixtures) {
     const html = readFileSync(`tests/fixtures/sites/${name}`, "utf8");
-    assert.doesNotMatch(html, /<script|<style|<img|<a /i, name);
+    // Only JSON-LD @type values are kept, as a script block.
+    assert.doesNotMatch(
+      html.replace(/<script type="application\/ld\+json">[^<]*<\/script>/g, ""),
+      /<script|<style|<img|<a /i,
+      name,
+    );
     const body = html.slice(html.indexOf("<body>"));
     assert.doesNotMatch(body.replace(/<[^>]*>/g, "").trim(), /\S/, name);
   }

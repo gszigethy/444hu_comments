@@ -30,6 +30,7 @@ test("page resources are web accessible on the same sites, including the site li
   const [group] = manifest.web_accessible_resources;
   assert.deepEqual([...group.matches].sort(), expected, hint);
   assert.ok(group.resources.includes("sites.json"));
+  assert.ok(group.resources.includes("444hsz_multisite_inject.js"));
 });
 
 test("the options page and both background styles are declared", () => {

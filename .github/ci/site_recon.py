@@ -89,9 +89,12 @@ class Skeleton(HTMLParser):
     of site content while preserving where an <article>, <main> or <footer> sits.
     """
 
-    def __init__(self, url):
+    def __init__(self, url, ld_types=()):
         super().__init__(convert_charrefs=True)
         self.url, self.out, self.stack, self.head = url, [], [], []
+        # JSON-LD is kept as its @type values only: it is the article signal on some sites.
+        if ld_types:
+            self.head.append('<script type="application/ld+json">' + json.dumps({"@graph": [{"@type": t} for t in ld_types]}) + "</script>")
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
@@ -226,7 +229,7 @@ def main():
                 entry["article"] = {"url": url, "status": status}
         # A redirect (login wall, section page) would give a misleading fixture.
         if args.fixtures and entry["article"] and entry["article"].get("bytes") and entry["article"]["finalUrl"] == entry["article"]["url"]:
-            skeleton = Skeleton(entry["article"]["url"])
+            skeleton = Skeleton(entry["article"]["url"], entry["article"]["jsonLdTypes"])
             skeleton.feed(last_body[1])
             Path(args.fixtures).mkdir(parents=True, exist_ok=True)
             (Path(args.fixtures) / f"{site['slug']}.html").write_text(skeleton.render())
