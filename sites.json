@@ -1,0 +1,312 @@
+{
+  "source": "https://444hsz.com/assets/config/app-settings.json",
+  "fetchedAt": "2026-10-07T15:05:15Z",
+  "sourceSha256": "512234798aa71714ea8fe3670f91559b08b52ffa904d593354649c9cb90aa4d8",
+  "shortname": "444hsz",
+  "sites": [
+    {
+      "title": "444hsz",
+      "regex": "444hsz\\.com",
+      "domain": "444hsz.com",
+      "label": "444hsz",
+      "slug": "444hsz",
+      "default": true,
+      "noSubmit": true,
+      "style": {
+        "accentColor": "#29af0a",
+        "tintColor": "#fff",
+        "doodleColor": "#ccc",
+        "darkDoodleColor": "#666"
+      }
+    },
+    {
+      "title": "444.hu és blogjai",
+      "regex": "(\\w+\\.)?444\\.hu",
+      "label": "444",
+      "domain": "444.hu",
+      "slug": "444",
+      "transforms": [
+        {
+          "regex": "\\?appview$",
+          "replace": ""
+        }
+      ],
+      "style": {
+        "accentColor": "#29af0a",
+        "tintColor": "#ffff75"
+      },
+      "defaultImage": "https://static.444.hu/img/444-fb.png"
+    },
+    {
+      "title": "Qubit",
+      "regex": "qubit\\.hu",
+      "domain": "qubit.hu",
+      "label": "Qubit",
+      "slug": "qubit",
+      "style": {
+        "accentColor": "#c27cff"
+      },
+      "defaultImage": "https://assets.qubit.hu/assets/qubit/static/qubit-fb-9cab12b8868c72f3b434e555975f9ccc.png"
+    },
+    {
+      "title": "Telex",
+      "regex": "telex\\.hu",
+      "domain": "telex.hu",
+      "label": "Telex",
+      "slug": "telex",
+      "addPostfix": true,
+      "style": {
+        "accentColor": "#009966"
+      },
+      "defaultImage": "https://telex.hu/telex_logo_fb_share.png"
+    },
+    {
+      "title": "Transtelex",
+      "regex": "transtelex\\.ro",
+      "domain": "transtelex.ro",
+      "label": "Transtelex",
+      "slug": "transtelex",
+      "addPostfix": true,
+      "style": {
+        "accentColor": "#3187a7"
+      }
+    },
+    {
+      "title": "24",
+      "regex": "(\\w+\\.)?24\\.hu",
+      "domain": "24.hu",
+      "label": "24.hu",
+      "slug": "24",
+      "style": {
+        "accentColor": "#fc4842"
+      }
+    },
+    {
+      "title": "Szabad Európa",
+      "regex": "www\\.szabadeuropa\\.hu",
+      "domain": "szabadeuropa.hu",
+      "label": "Szabad Európa",
+      "slug": "szabadeuropa",
+      "addPostfix": true,
+      "style": {
+        "accentColor": "#ec6803"
+      }
+    },
+    {
+      "title": "RTL",
+      "regex": "rtl\\.hu",
+      "domain": "rtl.hu",
+      "label": "RTL",
+      "slug": "rtl",
+      "addPostfix": true,
+      "style": {
+        "accentColor": "#21a4b1"
+      }
+    },
+    {
+      "title": "Lakmusz",
+      "regex": "www\\.lakmusz\\.hu",
+      "domain": "lakmusz.hu",
+      "label": "Lakmusz",
+      "slug": "lakmusz",
+      "style": {
+        "accentColor": "#63c3ee"
+      }
+    },
+    {
+      "title": "Mérce",
+      "regex": "(\\w+\\.)?merce\\.hu",
+      "domain": "merce.hu",
+      "label": "Mérce",
+      "slug": "merce",
+      "style": {
+        "accentColor": "#643a89"
+      }
+    },
+    {
+      "title": "Forbes",
+      "regex": "(\\w+\\.)?forbes\\.hu",
+      "domain": "forbes.hu",
+      "label": "Forbes",
+      "slug": "forbes",
+      "style": {
+        "accentColor": "#d97706"
+      }
+    },
+    {
+      "title": "Eduline",
+      "regex": "(\\w+\\.)?eduline\\.hu",
+      "domain": "eduline.hu",
+      "label": "Eduline",
+      "slug": "eduline",
+      "noSubmit": true,
+      "style": {
+        "accentColor": "#e12e82"
+      }
+    },
+    {
+      "title": "Media1",
+      "regex": "(\\w+\\.)?media1\\.hu",
+      "domain": "media1.hu",
+      "label": "Media1",
+      "slug": "media1",
+      "useScraper": false,
+      "style": {
+        "accentColor": "#556492"
+      }
+    },
+    {
+      "title": "hvg",
+      "regex": "(\\w+\\.)?hvg\\.hu",
+      "domain": "hvg.hu",
+      "transforms": [
+        {
+          "regex": "m\\.hvg\\.hu",
+          "replace": "hvg.hu"
+        }
+      ],
+      "label": "hvg",
+      "slug": "hvg",
+      "noSubmit": true,
+      "style": {
+        "accentColor": "#e25900"
+      }
+    },
+    {
+      "title": "The Guardian",
+      "regex": "(\\w+\\.)?theguardian\\.com",
+      "domain": "theguardian.com",
+      "label": "The Guardian",
+      "addPostfix": true,
+      "slug": "theguardian",
+      "style": {
+        "accentColor": "#C70000"
+      }
+    },
+    {
+      "title": "Magyar Hang",
+      "regex": "(\\w+\\.)?hang\\.hu",
+      "domain": "hang.hu",
+      "label": "Magyar Hang",
+      "addPostfix": true,
+      "slug": "magyarhang",
+      "style": {
+        "accentColor": "#dd4c4f"
+      }
+    },
+    {
+      "title": "Magyar Narancs",
+      "regex": "(\\w+\\.)?magyarnarancs\\.hu",
+      "domain": "magyarnarancs.hu",
+      "label": "Magyar Narancs",
+      "addPostfix": true,
+      "slug": "magyarnarancs",
+      "style": {
+        "accentColor": "#c9a300"
+      }
+    },
+    {
+      "title": "Rakéta",
+      "regex": "(\\w+\\.)?raketa\\.hu",
+      "domain": "raketa.hu",
+      "label": "Rakéta",
+      "addPostfix": true,
+      "slug": "raketa",
+      "style": {
+        "accentColor": "#be381c"
+      }
+    },
+    {
+      "title": "G7",
+      "regex": "(\\w+\\.)?g7\\.hu",
+      "domain": "g7.hu",
+      "label": "G7",
+      "slug": "g7",
+      "style": {
+        "accentColor": "#5ae39d"
+      }
+    },
+    {
+      "title": "Válasz Online",
+      "regex": "www\\.valaszonline\\.hu",
+      "domain": "www.valaszonline.hu",
+      "label": "Válasz Online",
+      "slug": "valaszonline",
+      "style": {
+        "accentColor": "#27aae1"
+      },
+      "defaultImage": "https://www.valaszonline.hu/wp-content/uploads/2018/12/cropped-valaszonline_logo_699-300x300.jpg"
+    },
+    {
+      "title": "Klubrádió",
+      "regex": "www\\.klubradio\\.hu",
+      "regexPath": "/adasok/|/hirek/|/szabadsag-klub/",
+      "domain": "www.klubradio.hu",
+      "label": "Klubrádió",
+      "addPostfix": true,
+      "slug": "klubradio",
+      "style": {
+        "accentColor": "#e79100"
+      },
+      "defaultImage": "https://www.klubradio.hu/static/frontend/imgs/KR-clean-logo.png"
+    },
+    {
+      "title": "Népszava",
+      "regex": "nepszava\\.hu",
+      "domain": "nepszava.hu",
+      "label": "Népszava",
+      "addPostfix": true,
+      "slug": "nepszava",
+      "style": {
+        "accentColor": "#157efc"
+      },
+      "defaultImage": "https://nepszava.hu/pub/i/icon.png"
+    },
+    {
+      "title": "Menedzsment Fórum",
+      "regex": "mfor\\.hu",
+      "domain": "mfor.hu",
+      "label": "mfor.hu",
+      "addPostfix": true,
+      "slug": "mfor",
+      "style": {
+        "accentColor": "#4296b1"
+      },
+      "defaultImage": "https://mfor.hu/mfor/images/mfor_og_image_1200x630.jpg"
+    },
+    {
+      "title": "Átlátszó",
+      "regex": "atlatszo\\.hu",
+      "domain": "atlatszo.hu",
+      "label": "Átlátszó",
+      "slug": "atlatszo",
+      "style": {
+        "accentColor": "#ff2932"
+      },
+      "defaultImage": "https://cdn.discordapp.com/attachments/1027298107635015710/1124538695375130788/image.png"
+    },
+    {
+      "title": "Kontroll",
+      "regex": "kontroll\\.hu",
+      "domain": "kontroll.hu",
+      "label": "Kontroll",
+      "slug": "kontroll",
+      "style": {
+        "accentColor": "#5fb547"
+      },
+      "defaultImage": "https://kontroll.hu/image/kontoll_logo_share.jpg"
+    },
+    {
+      "title": "Amerikai Népszava",
+      "regex": "nepszava\\.us",
+      "domain": "nepszava.us",
+      "label": "Népszava.us",
+      "addPostfix": true,
+      "slug": "amerikainepszava",
+      "style": {
+        "accentColor": "#31609c"
+      },
+      "defaultImage": "https://nepszava.us/wp-content/uploads/2021/05/AN-modern-logo-1.jpg"
+    }
+  ]
+}
