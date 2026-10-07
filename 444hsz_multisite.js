@@ -8,6 +8,7 @@
   var AUTOLOAD_KEY = "_444hsz_autoload_comments";
   var ARTICLE_LD = ["NewsArticle", "Article", "BlogPosting"];
   var RETRIES = 10;
+  var MAX_RESTORES = 10;
 
   function log(msg) {
     console.debug("%c[444hsz]", "color: #29af0a;", msg);
@@ -164,24 +165,62 @@
       storeAutoload(check.checked);
     });
     block.append(title, show, auto, thread);
-    return { block: block, start: start, autoload: check };
+    return {
+      block: block,
+      start: start,
+      autoload: check,
+      started: function () {
+        return loaded;
+      },
+    };
   }
 
+  // The block we want on the page right now, or null on pages without one.
+  var current = null;
+  var restores = 0;
+  var safeSpot = false;
+
   function removeBlock() {
+    current = null;
     var old = document.getElementById(BLOCK_ID);
     if (old) old.remove();
   }
 
   // Inserts the block if this is an article page. Returns true once handled.
-  function mount(site, shortname) {
+  // `resume` starts loading at once, for a block that replaces one already in use.
+  function mount(site, shortname, resume) {
     removeBlock();
     if (!isArticle(document, site)) return false;
-    var where = findInsertion(document);
+    // After the page has thrown the block away twice, stop fighting its
+    // renderer and use the end of <body>, which no framework manages.
+    var where = safeSpot
+      ? { parent: document.body, before: null }
+      : findInsertion(document);
     var built = buildBlock(site, shortname);
     where.parent.insertBefore(built.block, where.before);
+    current = { site: site, shortname: shortname, built: built };
     log("Comments block inserted for " + site.slug);
-    if (built.autoload.checked) built.start();
+    if (resume || built.autoload.checked) built.start();
     return true;
+  }
+
+  // Vue/Nuxt sites (Telex) rebuild their page after our first run and drop
+  // nodes they do not know. Put the block back when that happens, a limited
+  // number of times, so a page that keeps removing it cannot loop us.
+  var restoreTimer = null;
+  function watchRemoval() {
+    if (typeof MutationObserver === "undefined") return;
+    new MutationObserver(function () {
+      if (!current || current.built.block.isConnected || restoreTimer) return;
+      restoreTimer = setTimeout(function () {
+        restoreTimer = null;
+        if (!current || current.built.block.isConnected) return;
+        if (++restores > MAX_RESTORES) return;
+        if (restores >= 2) safeSpot = true;
+        log("Comments block was removed by the page, inserting it again");
+        mount(current.site, current.shortname, current.built.started());
+      }, 300);
+    }).observe(document.body, { childList: true, subtree: true });
   }
 
   // Article markup often arrives after the first run (client rendering), so
@@ -216,6 +255,7 @@
     log("Site: " + site.slug);
     mountWithRetries(site, data.shortname, 0);
     watchNavigation(site, data.shortname);
+    watchRemoval();
     return site;
   }
 

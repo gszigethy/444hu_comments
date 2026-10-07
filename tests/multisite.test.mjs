@@ -46,6 +46,7 @@ async function openPage(t, { html, url, storage = {} }) {
     document: window.document,
     localStorage: window.localStorage,
     CustomEvent: window.CustomEvent,
+    MutationObserver: window.MutationObserver,
     location,
     chrome: createChromeStub().chrome,
     fetch: fetchSites(),
@@ -307,4 +308,72 @@ test("a failing site list fetch is logged, not left unhandled", async () => {
   }
   for (let i = 0; i < 50; i++) await Promise.resolve();
   assert.equal(logged.length, 1);
+});
+
+const nuxtLike =
+  '<!doctype html><meta property="og:type" content="article"><body><main><div class="sub-container"><h1>x</h1></div></main></body>';
+
+test("a block thrown away by the page's renderer is put back, then moved to a safe spot", async (t) => {
+  const page = await openPage(t, {
+    html: nuxtLike,
+    url: "https://telex.hu/gazdasag/2026/10/07/x",
+  });
+  assert.equal(page.block().parentElement.tagName, "MAIN");
+  page.block().remove();
+  await page.settle();
+  await page.drainRetries();
+  assert.ok(page.block(), "restored after the first removal");
+  assert.equal(page.block().parentElement.tagName, "MAIN");
+  page.block().remove();
+  await page.settle();
+  await page.drainRetries();
+  assert.equal(
+    page.block().parentElement.tagName,
+    "BODY",
+    "second removal moves it out of the app",
+  );
+});
+
+test("a block that was loading is restored loading, not as a dead button", async (t) => {
+  const page = await openPage(t, {
+    html: nuxtLike,
+    url: "https://telex.hu/gazdasag/2026/10/07/x",
+  });
+  page.block().querySelector(".hsz444-show").click();
+  await page.settle();
+  assert.equal(page.events.length, 1);
+  page.block().remove();
+  await page.settle();
+  await page.drainRetries();
+  assert.equal(
+    page.events.length,
+    2,
+    "Disqus is asked to load again for the new container",
+  );
+});
+
+test("a page that keeps removing the block cannot make us loop", async (t) => {
+  const page = await openPage(t, {
+    html: nuxtLike,
+    url: "https://telex.hu/gazdasag/2026/10/07/x",
+  });
+  for (let i = 0; i < 15; i++) {
+    page.block()?.remove();
+    await page.settle();
+    await page.drainRetries();
+  }
+  assert.equal(page.block(), null, "gave up after the limit");
+});
+
+test("navigation to a section while the block is gone does not bring it back", async (t) => {
+  const page = await openPage(t, {
+    html: nuxtLike,
+    url: "https://www.klubradio.hu/hirek/egy-1",
+  });
+  page.location.href = "https://www.klubradio.hu/musor";
+  page.location.pathname = "/musor";
+  page.intervals.forEach((callback) => callback());
+  await page.settle();
+  await page.drainRetries();
+  assert.equal(page.block(), null);
 });
