@@ -3,7 +3,9 @@
 // own settings shows up here as off, and nothing is stored by this page.
 (function () {
   var Sites = globalThis.Hsz444Sites;
-  var state = { sites: [], excluded: [], granted: {} };
+  var Import = globalThis.Hsz444Import;
+  // pending: slugs preselected by the import, not yet switched on.
+  var state = { sites: [], excluded: [], granted: {}, pending: [] };
 
   var NOTICES = {
     "#telepites":
@@ -58,6 +60,7 @@
         toggle(site);
       });
       var swatch = element("span", "swatch");
+      var marked = !granted && state.pending.indexOf(site.slug) !== -1;
       swatch.style.background =
         (site.style && site.style.accentColor) || "#29af0a";
       label.append(
@@ -66,6 +69,7 @@
         element("span", "name", site.title),
         element("span", "domain", site.domain),
       );
+      if (marked) label.appendChild(element("span", "badge", "kijelölve"));
       item.appendChild(label);
       list.appendChild(item);
     });
@@ -88,6 +92,70 @@
       excluded.appendChild(item);
     });
     $("excluded").previousElementSibling.hidden = !state.excluded.length;
+    renderImport();
+  }
+
+  // Imported slugs that are not switched on yet.
+  function pendingSites() {
+    return state.sites.filter(function (site) {
+      return (
+        state.pending.indexOf(site.slug) !== -1 && !state.granted[site.slug]
+      );
+    });
+  }
+
+  function renderImport() {
+    var sites = pendingSites();
+    $("import-result").hidden = !sites.length;
+    $("import-text").textContent = sites.length
+      ? "Importált kijelölés: " +
+        sites
+          .map(function (site) {
+            return site.title;
+          })
+          .join(", ") +
+        ". Ezek még nincsenek bekapcsolva."
+      : "";
+  }
+
+  function importFailed(text) {
+    showMessage(text);
+    return Promise.resolve();
+  }
+
+  // The import only preselects. Switching on is a second click, because the
+  // user gesture of this click does not survive the tab round trip.
+  function importSettings() {
+    showMessage("");
+    return chrome.permissions
+      .request({ origins: [Import.ORIGIN] })
+      .then(function (ok) {
+        if (!ok) {
+          return importFailed(
+            "Az importáláshoz a 444hsz.com elérése kell. A bővítmény csak a beállítás kiolvasásáig használja, utána visszavonja.",
+          );
+        }
+        return Import.readSettings().then(function (raw) {
+          var found = raw && Import.parseSettings(raw, state.sites);
+          if (!found) return importFailed("Nincs importálható beállítás.");
+          state.pending = found.slugs;
+          render();
+        });
+      })
+      .catch(function (error) {
+        return importFailed("Az importálás nem sikerült: " + error.message);
+      });
+  }
+
+  function applyImport() {
+    var sites = pendingSites();
+    state.pending = [];
+    return request(sites);
+  }
+
+  function discardImport() {
+    state.pending = [];
+    render();
   }
 
   async function refresh() {
@@ -159,6 +227,9 @@
     $("notice").hidden = !notice;
     $("all-on").addEventListener("click", allOn);
     $("all-off").addEventListener("click", allOff);
+    $("import").addEventListener("click", importSettings);
+    $("import-apply").addEventListener("click", applyImport);
+    $("import-discard").addEventListener("click", discardImport);
     chrome.permissions.onAdded.addListener(refresh);
     chrome.permissions.onRemoved.addListener(refresh);
     await refresh();

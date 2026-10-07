@@ -29,7 +29,8 @@
     "*://www.klubradio.hu/*",
     "*://www.lakmusz.hu/*",
     "*://www.szabadeuropa.hu/*",
-    "*://www.valaszonline.hu/*"
+    "*://www.valaszonline.hu/*",
+    "https://444hsz.com/*"
   ],
   "background": {
     "service_worker": "background.js",

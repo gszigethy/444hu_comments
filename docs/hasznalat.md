@@ -24,6 +24,28 @@ A beállítások oldal soha nem tárol külön „be/ki” jelölőt: a kapcsol�
 tényleges engedélyét mutatja, ezért ha a böngésző saját beállításaiban vonod
 vissza a hozzáférést, az itt is kikapcsoltként jelenik meg.
 
+### Kiinduló kijelölés importálása a 444hsz.com-ról
+
+Ha a 444hsz.com oldalon már beállítottad az oldalszűrőt (a hírfolyam
+hárompontos menüjében), azt kiinduló kijelölésnek átveheted:
+
+1. A beállítások oldalon kattints az **Importálás a 444hsz.com-ról** gombra.
+2. A böngésző engedélyt kér a `444hsz.com` eléréséhez. Ez csak a beállítás
+   kiolvasásához kell: a bővítmény kiolvassa, majd **azonnal visszavonja** a
+   hozzáférést. Ha nincs nyitva 444hsz.com fül, átmenetileg a háttérben nyit egyet.
+3. Az importált oldalak **csak ki lesznek jelölve** („kijelölve” jelzés), még nincs
+   bekapcsolva semmi. A **Kiválasztottak bekapcsolása** gombbal kérheted az
+   engedélyeket (ismét egyetlen felugró ablak), vagy az **Elvetés** gombbal
+   eldobhatod a kijelölést.
+
+Tudnivalók: a 444hsz.com szűrője azt jelöli, mely oldalak cikkei jelenjenek meg
+a hírfolyamban, nem azt, hogy hol akarsz kommentelni, ezért ez csak
+kiindulópont. Az üres szűrő „minden oldalt” jelent. Ha a 444hsz.com-on még nem
+jártál ebben a böngészőben, vagy a beállítás nem olvasható, a „Nincs
+importálható beállítás.” üzenetet kapod, és semmi sem változik. Ha elutasítod
+a 444hsz.com-hoz kért engedélyt, az importálás nem fut le; ez nem érinti a
+bővítmény többi részét.
+
 ### Mi van, ha véletlenül a „Mégse” / „Tiltás” gombra kattintottam?
 
 Ez nem rontja el a bővítményt, csak az adott oldal marad kikapcsolva.

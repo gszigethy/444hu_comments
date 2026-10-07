@@ -11,6 +11,7 @@ Manifest V3 bővítmény, build lépés nélkül (nincs csomagoló vagy transpil
 | `444hsz_sites.js` | Közös oldalillesztő: hoszt/útvonal illesztés, szál-URL, cím, origin minta |
 | `background.js` | Service worker (Chrome) / event page (Firefox): a megadott engedélyek alapján regisztrálja a content scripteket, telepítéskor/frissítéskor megnyitja a beállításokat |
 | `options.html`, `options.js`, `options.css` | Beállítások oldal: oldalankénti kapcsoló (`permissions.request/remove`), „Mind be/ki”, magyarázó súgó |
+| `444hsz_import.js` | A 444hsz.com `settingsData.articleFeed.filters.sites` szűrőjének kiolvasása és értelmezése (a kiolvasás `scripting.executeScript`-tel egy 444hsz.com fülben történik, az engedélyt a végén visszavonja) |
 | `444hsz_multisite.js` | A 444.hu-n kívüli oldalak content scriptje (egyelőre csak jelez a konzolon) |
 | `444hu_comments.js` | Content script: `DOMContentLoaded` után a hoszt alapján kiválasztja a frontendet, és `<script type=module>`/`<link>` elemekkel beinjektálja az erőforrásokat; meta-elemekben átadja a bővítmény URL-jét és verzióját |
 | `444hu_comments_inject.js` | Az új (Ember alapú) 444.hu frontend modulja: megvárja a `n3/app` útválasztót, minden cikkoldalnál beszúrja a komment blokkot és a felső gombot, kezeli a beállításokat és a Disqus betöltését |
@@ -43,6 +44,14 @@ Ezért a `web_accessible_resources` bejegyzés szükséges.
   `manifest.json` két listájának (`optional_host_permissions`,
   `web_accessible_resources.matches`) frissítése; a `manifest.test.mjs` hibája
   kiírja a várt listát.
+
+- **Import a 444hsz.com-ról:** a szűrő a 444hsz.com saját `localStorage`-ában van
+  (nem sütiben), `settingsData.articleFeed.filters.sites` a bejelölt oldalak
+  tömbje, az üres tömb „mind”. A formátum a 444hsz.com belső ügye, a szinkron
+  workflow nem figyeli, ezért az értelmező minden lépést ellenőriz, és nem
+  értelmezhető adatnál `null`-t ad. A kiolvasás csak előkijelölést ad; a
+  bekapcsolás külön kattintás, mert a felhasználói gesztus nem éli túl az
+  aszinkron fülműveleteket.
 
 ### Működés röviden (modern frontend)
 

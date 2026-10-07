@@ -9,10 +9,13 @@ const list = JSON.parse(readFileSync("sites.json", "utf8")).sites;
 const expected = sites.supportedSites(list).map(sites.originPattern).sort();
 const hint = `Expected patterns (copy into manifest.json):\n${JSON.stringify(expected, null, 2)}`;
 
-test("optional host permissions are exactly the supported sites", () => {
+// The import reads 444hsz.com for a moment; it is not a site the extension runs on.
+const IMPORT_ORIGIN = "https://444hsz.com/*";
+
+test("optional host permissions are the supported sites plus the import origin", () => {
   assert.deepEqual(
     [...manifest.optional_host_permissions].sort(),
-    expected,
+    [...expected, IMPORT_ORIGIN].sort(),
     hint,
   );
 });

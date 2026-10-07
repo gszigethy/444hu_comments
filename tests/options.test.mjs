@@ -19,9 +19,11 @@ async function openOptions(t, { hash = "", ...stubOptions } = {}) {
     location: dom.window.location,
     chrome: stub.chrome,
     fetch: fetchSites(),
+    setTimeout,
+    clearTimeout,
     console,
   });
-  for (const file of ["444hsz_sites.js", "options.js"]) {
+  for (const file of ["444hsz_sites.js", "444hsz_import.js", "options.js"]) {
     const path = new URL(`../${file}`, import.meta.url);
     new Script(await readFile(path, "utf8"), {
       filename: path.pathname,
@@ -186,4 +188,119 @@ test("a failure while loading the site list is shown, not left unhandled", async
     dom.window.document.getElementById("message").textContent,
     /nem sikerült: offline/,
   );
+});
+const settings = (sites) =>
+  JSON.stringify({ articleFeed: { filters: { sites, showSport: true } } });
+
+test("import preselects the 444hsz.com filter, then a second click switches them on", async (t) => {
+  const page = await openOptions(t, {
+    settingsData: settings([
+      { slug: "telex" },
+      { slug: "qubit" },
+      { slug: "hvg" },
+    ]),
+  });
+  page.$("import").click();
+  await page.settle();
+  await new Promise((resolve) => setTimeout(resolve, 10));
+  await page.settle();
+  // Nothing is switched on by the import itself, and the 444hsz.com access is gone.
+  assert.ok(page.switches().every((input) => !input.checked));
+  assert.equal(page.state.granted.has("https://444hsz.com/*"), false);
+  assert.equal(page.$("import-result").hidden, false);
+  assert.match(page.$("import-text").textContent, /Qubit, Telex/);
+  assert.equal(page.dom.window.document.querySelectorAll(".badge").length, 2);
+  page.$("import-apply").click();
+  await page.settle();
+  const last = page.calls
+    .filter(([name]) => name === "permissions.request")
+    .at(-1);
+  assert.deepEqual(last[1].sort(), ["*://qubit.hu/*", "*://telex.hu/*"]);
+  assert.equal(page.$("summary").textContent, "2 / 23 oldal bekapcsolva");
+  assert.equal(page.$("import-result").hidden, true);
+});
+
+test("an empty 444hsz.com filter means every site; an open tab is reused and left open", async (t) => {
+  const page = await openOptions(t, {
+    openTabs: ["https://444hsz.com/hirfolyam"],
+    settingsData: settings([]),
+  });
+  page.$("import").click();
+  await page.settle();
+  assert.equal(
+    page.calls.some(([name]) => name === "tabs.create"),
+    false,
+  );
+  assert.equal(
+    page.calls.some(([name]) => name === "tabs.remove"),
+    false,
+  );
+  assert.equal(page.dom.window.document.querySelectorAll(".badge").length, 23);
+});
+
+test("a tab opened for the import is closed again", async (t) => {
+  const page = await openOptions(t, { settingsData: settings([]) });
+  page.$("import").click();
+  await new Promise((resolve) => setTimeout(resolve, 10));
+  await page.settle();
+  assert.ok(page.calls.some(([name]) => name === "tabs.remove"));
+  assert.equal(page.state.tabs.length, 0);
+});
+
+test("missing, broken or unusable data changes nothing and says so", async (t) => {
+  for (const settingsData of [
+    null,
+    "not json",
+    "{}",
+    settings([{ slug: "hvg" }]),
+  ]) {
+    const page = await openOptions(t, {
+      openTabs: ["https://444hsz.com/"],
+      settingsData,
+    });
+    page.$("import").click();
+    await page.settle();
+    assert.equal(
+      page.$("message").textContent,
+      "Nincs importálható beállítás.",
+      String(settingsData),
+    );
+    assert.equal(page.$("import-result").hidden, true);
+    assert.equal(page.state.granted.has("https://444hsz.com/*"), false);
+  }
+});
+
+test("declining the 444hsz.com access explains why it is needed", async (t) => {
+  const page = await openOptions(t, { answer: false });
+  page.$("import").click();
+  await page.settle();
+  assert.match(page.$("message").textContent, /444hsz\.com elérése kell/);
+  assert.equal(
+    page.calls.some(([name]) => name === "executeScript"),
+    false,
+  );
+});
+
+test("a failed import shows the error and still gives the access back", async (t) => {
+  const page = await openOptions(t, { openTabs: ["https://444hsz.com/"] });
+  page.chrome.scripting.executeScript = async () => {
+    throw new Error("nincs hozzáférés");
+  };
+  page.$("import").click();
+  await page.settle();
+  await page.settle();
+  assert.match(page.$("message").textContent, /nem sikerült: nincs hozzáférés/);
+  assert.equal(page.state.granted.has("https://444hsz.com/*"), false);
+});
+
+test("discarding the import clears the preselection", async (t) => {
+  const page = await openOptions(t, {
+    openTabs: ["https://444hsz.com/"],
+    settingsData: settings([{ slug: "telex" }]),
+  });
+  page.$("import").click();
+  await page.settle();
+  page.$("import-discard").click();
+  assert.equal(page.$("import-result").hidden, true);
+  assert.equal(page.dom.window.document.querySelectorAll(".badge").length, 0);
 });

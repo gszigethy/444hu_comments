@@ -111,3 +111,24 @@ input[type="checkbox"] {
   height: 1.1rem;
   accent-color: var(--accent);
 }
+.import {
+  margin: 1rem 0;
+}
+.import button {
+  font: inherit;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--fg);
+  cursor: pointer;
+}
+.hint {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.badge {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: var(--accent);
+}
