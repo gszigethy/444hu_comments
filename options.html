@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="hu">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>444hsz – beállítások</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main>
+      <h1>444hsz – oldalak kiválasztása</h1>
+      <p class="lead">
+        A bővítmény csak azokon az oldalakon fut, amelyeket itt bekapcsolsz.
+        Bekapcsoláskor a böngésző engedélyt kér: a bővítmény ilyenkor olvashatja
+        az adott oldal tartalmát, és betölti rá a 444hsz Disqus-szálat.
+      </p>
+
+      <p id="notice" class="notice" hidden></p>
+
+      <div class="toolbar">
+        <button id="all-on" type="button">Mind be</button>
+        <button id="all-off" type="button">Mind ki</button>
+        <span id="summary" aria-live="polite"></span>
+      </div>
+
+      <p id="message" class="message" role="status" hidden></p>
+      <ul id="sites" class="sites"></ul>
+
+      <h2>Nem támogatott oldalak</h2>
+      <ul id="excluded" class="sites excluded"></ul>
+
+      <details id="help" class="help">
+        <summary>Mi van, ha véletlenül a „Tiltás” gombra kattintottam?</summary>
+        <p>
+          Semmi sem romlott el, az oldal egyszerűen ki van kapcsolva. A
+          bővítmény ezen az oldalon újra bekapcsolható: kattints a kapcsolóra,
+          és a böngésző újra megkérdezi, hogy engedélyezed-e. Ha a böngésző most
+          sem kérdez, nyisd meg a bővítmény adatlapját a böngésző
+          bővítménykezelőjében, és engedélyezd ott az oldal elérését
+          („Webhelyhozzáférés”, illetve Firefoxban az „Engedélyek” fül).
+        </p>
+      </details>
+    </main>
+    <script src="444hsz_sites.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>

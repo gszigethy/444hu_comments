@@ -34,7 +34,7 @@ jobs:
       - name: Unit and frontend module tests with coverage
         run: |
           .github/ci/node-tools/node_modules/.bin/c8 \
-            --all --include='444hu_comments*.js' --include='444hsz_sites.js' \
+            --all --include='444hu_comments*.js' --include='444hsz_sites.js' --include='background.js' --include='options.js' --include='444hsz_multisite.js' \
             --check-coverage --per-file --lines=85 --functions=80 --branches=75 \
             --reporter=text --reporter=lcov \
             node --experimental-vm-modules --test tests/*.test.mjs
@@ -49,7 +49,7 @@ jobs:
           path: coverage/
           if-no-files-found: error
       - name: Enforce extension formatting
-        run: .github/ci/node-tools/node_modules/.bin/prettier --check '*.js' '*.css' manifest.json sites.json
+        run: .github/ci/node-tools/node_modules/.bin/prettier --check '*.js' '*.css' '*.html' manifest.json sites.json
       - name: Validate manifest and package extension
         run: python .github/ci/package_extension.py
       - name: Check SonarQube Cloud availability

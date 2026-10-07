@@ -33,6 +33,24 @@ class PackagingTests(unittest.TestCase):
             self.assertEqual(set(archive.namelist()), {"manifest.json", "loader.js", "images/icon.svg"})
             self.assertIsNone(archive.testzip())
 
+    def test_options_page_background_and_site_list_are_packaged(self):
+        self.manifest["background"] = {"service_worker": "worker.js", "scripts": ["lib.js", "worker.js"]}
+        self.manifest["options_ui"] = {"page": "options.html"}
+        self.manifest["optional_host_permissions"] = ["*://*.example.com/*"]
+        for name in ["lib.js", "options.js", "options.css", "sites.json", "registered.js"]:
+            (self.root / name).write_text("x")
+        (self.root / "worker.js").write_text('register({ id: "a", js: ["lib.js", "registered.js"] });')
+        (self.root / "options.html").write_text('<link rel="stylesheet" href="options.css"><script src="options.js"></script><script src="lib.js"></script>')
+        result = self.package()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        with zipfile.ZipFile(self.root / "dist/444hu_comments.zip") as archive:
+            self.assertTrue({"worker.js", "lib.js", "options.html", "options.js", "options.css", "sites.json", "registered.js"} <= set(archive.namelist()))
+            self.assertNotIn("private.txt", archive.namelist())
+
+    def test_missing_site_list_fails_when_sites_are_optional(self):
+        self.manifest["optional_host_permissions"] = ["*://*.example.com/*"]
+        self.assertNotEqual(self.package().returncode, 0)
+
     def test_missing_asset_fails(self):
         (self.root / "loader.js").unlink()
         self.assertNotEqual(self.package().returncode, 0)

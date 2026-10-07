@@ -25,6 +25,22 @@ if action.get("default_popup"):
 background = manifest.get("background", {})
 if background.get("service_worker"):
     references.append(background["service_worker"])
+references += background.get("scripts", [])
+# Content scripts are registered at runtime from the background script's
+# `js: [...]` lists, so the manifest does not name them. Package those too.
+for worker in [background.get("service_worker")] + background.get("scripts", []):
+    if worker:
+        for js_list in re.findall(r"js:\s*\[([^\]]*)\]", (root / worker).read_text()):
+            references += re.findall(r'"([^"]+\.js)"', js_list)
+# The options page is HTML: package it together with the files it loads.
+options_page = manifest.get("options_ui", {}).get("page")
+if options_page:
+    references.append(options_page)
+    html = (root / options_page).read_text()
+    references += [r for r in re.findall(r'(?:src|href)="([^"#?:]+)"', html)]
+# The site list is fetched at runtime by the options page and the workers.
+if manifest.get("optional_host_permissions"):
+    references.append("sites.json")
 for reference in references:
     assert not Path(reference).is_absolute() and ".." not in Path(reference).parts, reference
     matches = [Path(p) for p in glob.glob(reference) if Path(p).is_file()]
