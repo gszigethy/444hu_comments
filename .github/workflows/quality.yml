@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       QUALITY_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
@@ -51,10 +52,8 @@ jobs:
       - name: Validate manifest and package extension
         run: python .github/ci/package_extension.py
       - name: SonarQube Cloud analysis
-        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+        if: (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) && env.SONAR_TOKEN != ''
         uses: SonarSource/sonarqube-scan-action@d209202bc7d53ff1cc128f7f907dac145c9d6ae9 # v8.3.0
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: chrome-extension
