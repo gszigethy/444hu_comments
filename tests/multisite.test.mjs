@@ -34,3 +34,23 @@ test("a host outside the list is ignored", async () => {
   assert.equal(await runOn("https://example.com/", logs), null);
   assert.equal(logs.length, 0);
 });
+
+test("a failing site list fetch is logged, not left unhandled", async () => {
+  const logged = [];
+  const context = createContext({
+    chrome: createChromeStub().chrome,
+    fetch: async () => {
+      throw new Error("offline");
+    },
+    location: new URL("https://telex.hu/a/b"),
+    console: { debug: (...args) => logged.push(args) },
+  });
+  for (const file of ["444hsz_sites.js", "444hsz_multisite.js"]) {
+    const path = new URL(`../${file}`, import.meta.url);
+    new Script(await readFile(path, "utf8"), {
+      filename: path.pathname,
+    }).runInContext(context);
+  }
+  for (let i = 0; i < 50; i++) await Promise.resolve();
+  assert.equal(logged.length, 1);
+});

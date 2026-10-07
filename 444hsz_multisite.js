@@ -19,5 +19,9 @@
   if (typeof module !== "undefined") module.exports = api;
   // sites.json is listed in web_accessible_resources, which a content script
   // needs to fetch it. Skipped where no extension runtime exists.
-  if (typeof chrome !== "undefined" && chrome.runtime) run();
+  if (typeof chrome !== "undefined" && chrome.runtime) {
+    run().catch(function (error) {
+      console.debug("[444hsz]", error);
+    });
+  }
 })();

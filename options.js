@@ -171,6 +171,9 @@
     typeof chrome !== "undefined" &&
     chrome.runtime &&
     document.getElementById("sites")
-  )
-    init();
+  ) {
+    init().catch(function (error) {
+      showMessage("A beállítások betöltése nem sikerült: " + error.message);
+    });
+  }
 })();

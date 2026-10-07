@@ -159,3 +159,31 @@ test("install and update notices come from the URL hash", async (t) => {
   const install = await openOptions(t, { hash: "#telepites" });
   assert.match(install.$("notice").textContent, /444\.hu ajánlott/);
 });
+
+test("a failure while loading the site list is shown, not left unhandled", async (t) => {
+  const html = await readFile("options.html", "utf8");
+  const dom = new JSDOM(html, { url: "chrome-extension://test/options.html" });
+  t.after(() => dom.window.close());
+  const stub = createChromeStub();
+  const context = createContext({
+    window: dom.window,
+    document: dom.window.document,
+    location: dom.window.location,
+    chrome: stub.chrome,
+    fetch: async () => {
+      throw new Error("offline");
+    },
+    console,
+  });
+  for (const file of ["444hsz_sites.js", "options.js"]) {
+    const path = new URL(`../${file}`, import.meta.url);
+    new Script(await readFile(path, "utf8"), {
+      filename: path.pathname,
+    }).runInContext(context);
+  }
+  for (let i = 0; i < 50; i++) await Promise.resolve();
+  assert.match(
+    dom.window.document.getElementById("message").textContent,
+    /nem sikerült: offline/,
+  );
+});
