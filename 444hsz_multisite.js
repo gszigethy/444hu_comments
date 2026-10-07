@@ -155,7 +155,9 @@
       if (loaded) return;
       loaded = true;
       show.hidden = true;
-      loadComments(site, shortname);
+      loadComments(site, shortname).catch(function (error) {
+        log("Comments could not be loaded: " + error.message);
+      });
     }
     show.addEventListener("click", start);
     check.addEventListener("change", function () {
