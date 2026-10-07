@@ -73,6 +73,8 @@ Ezért a `web_accessible_resources` bejegyzés szükséges.
 `_444hsz_announcement_read`, `_444hsz_autoload_comments`,
 `_444hsz_show_disqus_recommendations`.
 
+Az egyes oldalak felderítésének eredménye: [oldalak-felderites.md](oldalak-felderites.md).
+
 ## Tesztelés
 
 Előfeltétel: Node 24, Python 3.13.
