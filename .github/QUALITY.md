@@ -35,7 +35,10 @@ LCOV and HTML reports are uploaded separately from the installable ZIP. Sonar
 imports LCOV and waits for the quality gate, so scanner upload success alone
 cannot make a failing gate green. Fork PRs cannot access the token; the skip
 is reported explicitly. Configure SONAR_TOKEN in repository Actions secrets
-and disable Sonar automatic analysis when using this CI scan.
+and disable Sonar automatic analysis when using this CI scan. Analysis runs
+on PRs and the default branch: this organization does not permit access to
+quality-gate data for non-main branches. Feature-branch pushes still run all
+tests, coverage checks and packaging.
 
 ## CI tools and package artifacts
 

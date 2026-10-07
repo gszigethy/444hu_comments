@@ -55,9 +55,12 @@ jobs:
       - name: Check SonarQube Cloud availability
         id: sonar
         env:
+          CAN_SCAN: ${{ github.event_name == 'pull_request' || github.ref_name == github.event.repository.default_branch }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          if [ -n "$SONAR_TOKEN" ]; then
+          if [ "$CAN_SCAN" != "true" ]; then
+            echo "::notice::SonarQube Cloud skipped on feature-branch pushes; PR and default-branch scans enforce the quality gate"
+          elif [ -n "$SONAR_TOKEN" ]; then
             echo "enabled=true" >> "$GITHUB_OUTPUT"
           else
             echo "::notice::SonarQube Cloud skipped: SONAR_TOKEN is unavailable"
