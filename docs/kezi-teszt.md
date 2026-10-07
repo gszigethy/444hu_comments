@@ -64,7 +64,7 @@ szálat hozza-e létre (és nincs-e duplikátum a 444hsz.com-on), a fórum
 ## D. 444.hu (változatlan viselkedés)
 
 - [ ] kommentek, fülek (hivatalos/444hsz), oldalsáv, beállítások, `#comment…`
-      hivatkozás ugyanúgy működnek, mint a 1.4.0.27-ben;
+      hivatkozás ugyanúgy működnek, mint az 1.4.0.27-ben;
 - [ ] `kor.444.hu` és `membership.444.hu`: a bővítmény nem fut;
 - [ ] egy blog aldomain (`jo.444.hu`) is működik.
 
