@@ -1,0 +1,61 @@
+{
+  "qubit": {
+    "after": ["figure > article"],
+    "like": "figure > article > div:last-child"
+  },
+  "telex": {
+    "after": [".article-html-content"]
+  },
+  "transtelex": {
+    "after": [".article-html-content"]
+  },
+  "24": {
+    "after": [".o-post__body .u-onlyArticlePages"]
+  },
+  "szabadeuropa": {
+    "after": ["#article-content .wsw"]
+  },
+  "rtl": {
+    "before": [".static-page__bottom-tags"]
+  },
+  "merce": {
+    "after": [".entry-content"],
+    "like": ".entry-content > p"
+  },
+  "forbes": {
+    "after": [".gutenberg-content"]
+  },
+  "media1": {
+    "after": [".slotArticle"]
+  },
+  "theguardian": {
+    "after": ["#maincontent"]
+  },
+  "magyarhang": {
+    "after": [".post-content"]
+  },
+  "magyarnarancs": {
+    "before": ["ul.tags"]
+  },
+  "raketa": {
+    "after": [".longform__text"]
+  },
+  "valaszonline": {
+    "before": [".taglist"]
+  },
+  "klubradio": {
+    "after": [".content-container"]
+  },
+  "nepszava": {
+    "append": [".single-article section[class*='col-sm-32']"]
+  },
+  "mfor": {
+    "after": [".article-body"]
+  },
+  "atlatszo": {
+    "after": [".the_content"]
+  },
+  "kontroll": {
+    "after": ["section.markdown-section"]
+  }
+}

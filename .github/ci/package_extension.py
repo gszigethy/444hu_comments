@@ -40,7 +40,7 @@ if options_page:
     references += [r for r in re.findall(r'(?:src|href)="([^"#?:]+)"', html)]
 # The site list is fetched at runtime by the options page and the workers.
 if manifest.get("optional_host_permissions"):
-    references.append("sites.json")
+    references += ["sites.json", "placements.json"]
 for reference in references:
     assert not Path(reference).is_absolute() and ".." not in Path(reference).parts, reference
     matches = [Path(p) for p in glob.glob(reference) if Path(p).is_file()]

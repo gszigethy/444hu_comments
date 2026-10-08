@@ -52,7 +52,8 @@
         "images/view_sidebar_black_24dp.svg",
         "images/settings_black_24dp.svg",
         "sites.json",
-        "444hsz_multisite_inject.js"
+        "444hsz_multisite_inject.js",
+        "placements.json"
       ],
       "matches": [
         "*://*.24.hu/*",

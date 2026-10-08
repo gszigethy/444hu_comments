@@ -13,6 +13,7 @@ Manifest V3 bővítmény, build lépés nélkül (nincs csomagoló vagy transpil
 | `options.html`, `options.js`, `options.css` | Beállítások oldal: oldalankénti kapcsoló (`permissions.request/remove`), „Mind be/ki”, magyarázó súgó |
 | `444hsz_import.js` | A 444hsz.com `settingsData.articleFeed.filters.sites` szűrőjének kiolvasása és értelmezése (a kiolvasás `scripting.executeScript`-tel egy 444hsz.com fülben történik, az engedélyt a végén visszavonja) |
 | `444hsz_multisite.js`, `444hsz_multisite.css` | A 444.hu-n kívüli oldalak content scriptje (izolált világban): cikkfelismerés, beszúrás a felderítés szabályai szerint, a blokk felépítése, SPA-követés (a cím 1 s-onkénti figyelése) |
+| `placements.json` | Oldalankénti beszúrási szabályok a 444.hu-n kívüli oldalakra: `after`/`before`/`append` (CSS-választólisták, az első látható találat nyer) és opcionális `like` (a blokk szélességét/bal szélét ennek az elemnek a méretéhez igazítja) |
 | `444hsz_multisite_inject.js` | A lap saját kontextusában fut (web-accessible): a `444hsz:load` eseményre beállítja a Disqus globálisait (`disqus_url`, `disqus_config` csak `url`+`title`, azonosító nélkül), betölti az `embed.js`-t, betöltött Disqus esetén `DISQUS.reset`-et hív |
 | `444hu_comments.js` | Content script: `DOMContentLoaded` után a hoszt alapján kiválasztja a frontendet, és `<script type=module>`/`<link>` elemekkel beinjektálja az erőforrásokat; meta-elemekben átadja a bővítmény URL-jét és verzióját |
 | `444hu_comments_inject.js` | Az új (Ember alapú) 444.hu frontend modulja: megvárja a `n3/app` útválasztót, minden cikkoldalnál beszúrja a komment blokkot és a felső gombot, kezeli a beállításokat és a Disqus betöltését |
@@ -53,6 +54,25 @@ Ezért a `web_accessible_resources` bejegyzés szükséges.
   értelmezhető adatnál `null`-t ad. A kiolvasás csak előkijelölést ad; a
   bekapcsolás külön kattintás, mert a felhasználói gesztus nem éli túl az
   aszinkron fülműveleteket.
+
+### Beszúrási pont oldalanként (`placements.json`)
+
+A blokk a cikk szövegoszlopa **után** kerül, a címkék/kapcsolódó linkek **előtt**,
+az oszlop szélességével és bal szélével. Az oldalankénti szabályt a valódi
+oldalakon mért elrendezésből vettük (2026-10-07); ha egy szabály nem illeszkedik
+(az oldal átalakult), a bővítmény az általános szabályra esik vissza
+(`findInsertion`: a `h1`-et tartalmazó `article`, `main`, `footer`, `body`), és a
+blokk szélessége az oldal oszlopához igazodik (`ResizeObserver` figyeli, ha az
+oszlop mérete később változik). Ellenőrzés valódi oldalakon (távoli böngészővel,
+nem része a CI-nek):
+
+```sh
+npm i playwright-core
+PLAYWRIGHT_DRIVER_URL=ws://host:3000/ node .github/ci/placement_preview.mjs telex,qubit 1366
+```
+
+Lakmusz, G7 és az Amerikai Népszava nem szerepel a fájlban (lásd a felderítést);
+a 444.hu a saját felületét használja.
 
 ### Működés röviden (modern frontend)
 

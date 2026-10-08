@@ -115,6 +115,10 @@ export function createChromeStub({
   return { chrome, calls, listeners, state };
 }
 
-export function fetchSites() {
-  return async () => ({ json: async () => siteList });
+// Answers sites.json, and placements.json with the given rules (none by default).
+export function fetchSites(placements = {}) {
+  return async (url) => ({
+    json: async () =>
+      String(url).includes("placements") ? placements : siteList,
+  });
 }

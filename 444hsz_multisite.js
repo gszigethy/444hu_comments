@@ -73,6 +73,87 @@
     return { parent: scope, before: null };
   }
 
+  // Per-site placement rules from placements.json: { after|before|append:
+  // [selectors], like: selector }. The first selector that matches a visible
+  // element wins. "after" and "before" put the block next to that element
+  // (so it stays in the article's column, ahead of tags and related links),
+  // "append" at the end of it. Unknown sites and rules that no longer match
+  // fall back to findInsertion().
+  var placements = {};
+
+  function firstVisible(selector) {
+    var matches;
+    try {
+      matches = document.querySelectorAll(selector);
+    } catch (error) {
+      return null;
+    }
+    return (
+      [].slice.call(matches).filter(function (node) {
+        return getComputedStyle(node).display !== "none";
+      })[0] || null
+    );
+  }
+
+  function placementFor(site) {
+    var rule = placements[site.slug];
+    if (!rule) return null;
+    var kinds = ["after", "before", "append"];
+    for (var i = 0; i < kinds.length; i++) {
+      var selectors = [].concat(rule[kinds[i]] || []);
+      for (var j = 0; j < selectors.length; j++) {
+        var node = firstVisible(selectors[j]);
+        if (!node || !node.parentNode) continue;
+        var spot =
+          kinds[i] === "append"
+            ? { parent: node, before: null }
+            : {
+                parent: node.parentNode,
+                before: kinds[i] === "after" ? node.nextSibling : node,
+              };
+        spot.reference = (rule.like && firstVisible(rule.like)) || node;
+        return spot;
+      }
+    }
+    return null;
+  }
+
+  // Give the block the width and left edge of the text column it follows, so
+  // it does not stretch across a full-width wrapper (or shrink to its content
+  // inside a flex row). Left alone when it already lines up with the reference.
+  function matchGeometry(block, reference) {
+    block.style.width = "";
+    block.style.maxWidth = "";
+    block.style.marginLeft = "";
+    if (!reference || !block.parentElement) return;
+    var ref = reference.getBoundingClientRect();
+    if (!ref.width) return;
+    var own = block.getBoundingClientRect();
+    if (
+      Math.abs(own.width - ref.width) <= 1 &&
+      Math.abs(own.left - ref.left) <= 1
+    ) {
+      return;
+    }
+    var parent = block.parentElement.getBoundingClientRect();
+    var padding =
+      parseFloat(getComputedStyle(block.parentElement).paddingLeft) || 0;
+    block.style.width = Math.round(ref.width) + "px";
+    block.style.maxWidth = "100%";
+    var offset = ref.left - parent.left - padding;
+    if (offset > 1) block.style.marginLeft = Math.round(offset) + "px";
+  }
+
+  // The reference often has no size yet when the block is inserted (images,
+  // lazy layout), and changes with the window, so measure again whenever it
+  // resizes.
+  function followGeometry(block, reference) {
+    if (!reference || typeof ResizeObserver === "undefined") return;
+    new ResizeObserver(function () {
+      if (block.isConnected) matchGeometry(block, reference);
+    }).observe(reference);
+  }
+
   function element(tag, className, text) {
     var node = document.createElement(tag);
     if (className) node.className = className;
@@ -195,10 +276,17 @@
     // renderer and use the end of <body>, which no framework manages.
     var where = safeSpot
       ? { parent: document.body, before: null }
-      : findInsertion(document);
+      : placementFor(site) || findInsertion(document);
     var built = buildBlock(site, shortname);
     where.parent.insertBefore(built.block, where.before);
-    current = { site: site, shortname: shortname, built: built };
+    current = {
+      site: site,
+      shortname: shortname,
+      built: built,
+      reference: where.reference,
+    };
+    matchGeometry(built.block, where.reference);
+    followGeometry(built.block, where.reference);
     log("Comments block inserted for " + site.slug);
     if (resume || built.autoload.checked) built.start();
     return true;
@@ -247,19 +335,33 @@
     }, 1000);
   }
 
+  // A missing or broken placements.json only loses the per-site tuning.
+  async function loadPlacements() {
+    try {
+      var response = await fetch(chrome.runtime.getURL("placements.json"));
+      return (await response.json()) || {};
+    } catch (error) {
+      return {};
+    }
+  }
+
   async function run() {
     var response = await fetch(chrome.runtime.getURL("sites.json"));
     var data = await response.json();
     var site = Sites.findSite(data.sites, location.hostname, location.pathname);
     if (!site) return null;
-    log("Site: " + site.slug);
+    placements = await loadPlacements();
     mountWithRetries(site, data.shortname, 0);
     watchNavigation(site, data.shortname);
     watchRemoval();
     return site;
   }
 
-  var api = { run: run, isArticle: isArticle, findInsertion: findInsertion };
+  var api = {
+    run: run,
+    isArticle: isArticle,
+    findInsertion: findInsertion,
+  };
   globalThis.Hsz444Multisite = api;
   if (typeof module !== "undefined") module.exports = api;
   // sites.json is listed in web_accessible_resources, which a content script

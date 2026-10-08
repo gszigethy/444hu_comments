@@ -17,7 +17,17 @@ const fixtureHtml = (slug) =>
 
 // Loads the content script into a jsdom page, with the timers captured so a
 // test can run retries and the navigation watcher by hand.
-async function openPage(t, { html, url, storage = {} }) {
+async function openPage(
+  t,
+  {
+    html,
+    url,
+    storage = {},
+    placements = {},
+    rects = {},
+    resizeObserver = false,
+  },
+) {
   const dom = new JSDOM(html, { url });
   t.after(() => dom.window.close());
   const { window } = dom;
@@ -40,16 +50,37 @@ async function openPage(t, { html, url, storage = {} }) {
   };
   const timeouts = [];
   const intervals = [];
+  const observers = [];
+  // jsdom has no layout: tests give elements fake rectangles by selector.
+  for (const [selector, rect] of Object.entries(rects)) {
+    window.document.querySelectorAll(selector).forEach((node) => {
+      node.getBoundingClientRect = () => ({
+        left: 0,
+        top: 0,
+        width: 0,
+        ...rect,
+      });
+    });
+  }
   const location = new URL(url);
   const context = createContext({
     window,
     document: window.document,
     localStorage: window.localStorage,
     CustomEvent: window.CustomEvent,
+    getComputedStyle: window.getComputedStyle.bind(window),
     MutationObserver: window.MutationObserver,
     location,
     chrome: createChromeStub().chrome,
-    fetch: fetchSites(),
+    fetch: fetchSites(placements),
+    ResizeObserver: resizeObserver
+      ? class {
+          constructor(callback) {
+            observers.push(callback);
+          }
+          observe() {}
+        }
+      : undefined,
     setTimeout: (callback) => timeouts.push(callback),
     setInterval: (callback) => intervals.push(callback),
     console: { debug() {} },
@@ -70,6 +101,7 @@ async function openPage(t, { html, url, storage = {} }) {
     events,
     injected,
     intervals,
+    observers,
     location,
     settle,
     block: () => window.document.getElementById("hsz444-comments"),
@@ -376,4 +408,180 @@ test("navigation to a section while the block is gone does not bring it back", a
   await page.settle();
   await page.drainRetries();
   assert.equal(page.block(), null);
+});
+
+// --- per-site placement rules ---
+
+const articlePage = (body) =>
+  `<!doctype html><meta property="og:type" content="article"><body>${body}</body>`;
+const column =
+  '<main><div class="wrap"><div class="text">Szöveg</div><ul class="tags"><li>címke</li></ul></div></main>';
+const telexUrl = "https://telex.hu/belfold/2026/10/07/x";
+
+test("'after' puts the block right behind the text, ahead of the tags", async (t) => {
+  const page = await openPage(t, {
+    html: articlePage(column),
+    url: telexUrl,
+    placements: { telex: { after: [".text"] } },
+  });
+  assert.equal(page.block().previousElementSibling.className, "text");
+  assert.equal(page.block().nextElementSibling.className, "tags");
+});
+
+test("'before' and 'append' place the block as asked", async (t) => {
+  let page = await openPage(t, {
+    html: articlePage(column),
+    url: telexUrl,
+    placements: { telex: { before: [".tags"] } },
+  });
+  assert.equal(page.block().nextElementSibling.className, "tags");
+  page = await openPage(t, {
+    html: articlePage(column),
+    url: telexUrl,
+    placements: { telex: { append: [".text"] } },
+  });
+  assert.equal(page.block().parentElement.className, "text");
+  assert.equal(page.block().nextElementSibling, null);
+});
+
+test("the first selector that matches wins; hidden matches and bad selectors are skipped", async (t) => {
+  const html = articlePage(
+    '<main><div class="text" style="display:none">x</div><div class="text">y</div><div class="other">z</div></main>',
+  );
+  const placements = {
+    telex: { after: ["div[", ".missing", ".text", ".other"] },
+  };
+  const page = await openPage(t, { html, url: telexUrl, placements });
+  const visibleText = page.document.querySelectorAll(".text")[1];
+  assert.equal(page.block().previousElementSibling, visibleText);
+});
+
+test("no rule for the site, or a rule that matches nothing, falls back to the generic placement", async (t) => {
+  let page = await openPage(t, {
+    html: articlePage(column),
+    url: telexUrl,
+    placements: { qubit: { after: [".text"] } },
+  });
+  assert.equal(
+    page.block().parentElement.tagName,
+    "MAIN",
+    "generic: end of main",
+  );
+  page = await openPage(t, {
+    html: articlePage(column),
+    url: telexUrl,
+    placements: { telex: { after: [".gone"] } },
+  });
+  assert.equal(page.block().parentElement.tagName, "MAIN");
+});
+
+test("a missing placements.json only loses the tuning", async (t) => {
+  const page = await openPage(t, {
+    html: articlePage(column),
+    url: telexUrl,
+    placements: null,
+  });
+  assert.ok(page.block());
+});
+
+test("the block takes the width and left edge of the text column it follows", async (t) => {
+  const page = await openPage(t, {
+    html: articlePage(column),
+    url: telexUrl,
+    placements: { telex: { after: [".text"] } },
+    rects: {
+      ".text": { left: 283, width: 800 },
+      ".wrap": { left: 0, width: 1366 },
+    },
+  });
+  assert.equal(page.block().style.width, "800px");
+  assert.equal(page.block().style.maxWidth, "100%");
+  assert.equal(page.block().style.marginLeft, "283px");
+});
+
+test("'like' measures another element, and a column that already lines up is left alone", async (t) => {
+  let page = await openPage(t, {
+    html: articlePage(
+      '<main><div class="wide"><p class="p">x</p></div></main>',
+    ),
+    url: telexUrl,
+    placements: { telex: { after: [".wide"], like: ".p" } },
+    rects: {
+      ".p": { left: 100, width: 600 },
+      ".wide": { left: 0, width: 1366 },
+      main: { left: 0, width: 1366 },
+    },
+  });
+  assert.equal(page.block().style.width, "600px");
+  assert.equal(page.block().style.marginLeft, "100px");
+  page = await openPage(t, {
+    html: articlePage(column),
+    url: telexUrl,
+    placements: { telex: { after: [".text"] } },
+    rects: { ".text": { left: 0, width: 0 } },
+  });
+  assert.equal(
+    page.block().style.width,
+    "",
+    "an unmeasured reference changes nothing",
+  );
+});
+
+test("the geometry is measured again when the reference resizes", async (t) => {
+  const page = await openPage(t, {
+    html: articlePage(column),
+    url: telexUrl,
+    placements: { telex: { after: [".text"] } },
+    rects: { ".text": { left: 0, width: 0 } },
+    resizeObserver: true,
+  });
+  assert.equal(page.block().style.width, "");
+  page.document.querySelector(".text").getBoundingClientRect = () => ({
+    left: 40,
+    width: 500,
+  });
+  page.observers.forEach((callback) => callback());
+  assert.equal(page.block().style.width, "500px");
+  assert.equal(page.block().style.marginLeft, "40px");
+});
+
+// --- the shipped placements.json ---
+
+const shipped = JSON.parse(readFileSync("placements.json", "utf8"));
+
+test("every placement belongs to a supported site and has valid selectors", () => {
+  const sites = JSON.parse(readFileSync("sites.json", "utf8")).sites;
+  const supported = sites
+    .filter((site) => !site.noSubmit)
+    .map((site) => site.slug);
+  const dom = new JSDOM("<body></body>");
+  for (const [slug, rule] of Object.entries(shipped)) {
+    assert.ok(
+      supported.includes(slug) && slug !== "444",
+      `${slug} is not a site this frontend serves`,
+    );
+    const kinds = Object.keys(rule).filter((key) => key !== "like");
+    assert.ok(
+      kinds.length &&
+        kinds.every((key) => ["after", "before", "append"].includes(key)),
+      slug,
+    );
+    for (const selector of [
+      ...kinds.flatMap((key) => [].concat(rule[key])),
+      rule.like,
+    ].filter(Boolean)) {
+      assert.doesNotThrow(
+        () => dom.window.document.querySelector(selector),
+        `${slug}: ${selector}`,
+      );
+    }
+  }
+  dom.window.close();
+});
+
+test("the placement file is web accessible", () => {
+  const manifest = JSON.parse(readFileSync("manifest.json", "utf8"));
+  assert.ok(
+    manifest.web_accessible_resources[0].resources.includes("placements.json"),
+  );
 });
