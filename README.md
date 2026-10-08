@@ -97,12 +97,12 @@ történet a commitokban megőrződött.
 
 **Miért készült ez a fork?** Az eredeti tároló utolsó változtatása 2025.
 szeptember 1-jén történt („added dark mode support”), azóta nem érkezett
-újabb commit, és egy nyitott pull request vár válaszra. Közben a 444hsz.com már sok más oldal kommentszálait is
-kezeli, amelyeket a bővítmény nem ismert, és a kód karbantartása (függőségek,
-tesztek, ellenőrzések, kiadások) is elmaradt. Ezért ez a fork folytatja a
-karbantartást, hogy a bővítmény használható és javítható maradjon. Ez nem
-az eredeti projekt hivatalos folytatása: a fork karbantartója külön, és nem
-az eredeti szerző.
+újabb commit, és egy nyitott pull request vár válaszra. Közben a 444hsz.com
+már sok más oldal kommentszálait is kezeli, amelyeket a bővítmény nem
+ismert, a kód karbantartása (függőségek, tesztek, ellenőrzések, kiadások)
+pedig nem folytatódott. Ezért ez a fork folytatja a karbantartást, hogy a
+bővítmény használható és javítható maradjon. Ez nem az eredeti projekt
+hivatalos folytatása: a fork karbantartója külön személy, nem az eredeti szerző.
 
 **Mi változott az eredetihez képest?** (részletek a
 [kiadásokban](https://github.com/gszigethy/444hu_comments/releases))
