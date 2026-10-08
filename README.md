@@ -5,7 +5,7 @@ A **444hsz** egy nem hivatalos böngészőbővítmény, amely a [444.hu](https:/
 Qubit, 24.hu stb., lásd a [listát](docs/tamogatott-oldalak.md)) cikkei alá
 visszahozza a kommentelés lehetőségét egy [Disqus](https://disqus.com) fórum
 beágyazásával. A bővítmény eredeti szerzője **nerblock**; ez a repó az
-eredeti, jelenleg gazdátlan projekt továbbfejlesztett forkja.
+eredeti projekt továbbfejlesztett forkja ([lásd lent](#eredet-és-ez-a-fork)).
 
 > **Szolgálati közlemény (a bővítmény saját szövege alapján):** a 444 2023
 > márciusától teljesen megszüntette a cikkek kommentelését. A hivatalos,
@@ -87,10 +87,43 @@ npm ci --prefix .github/ci/node-tools --ignore-scripts --no-audit --no-fund
 python3 -m unittest discover -s tests -p 'test_*.py' -v
 ```
 
+## Eredet és ez a fork
+
+A bővítményt **nerblock** készítette és tette közzé a
+[444hsz/444hu_comments](https://github.com/444hsz/444hu_comments) tárolóban
+(létrehozva 2019 decemberében). **Az alapötlet, az eredeti kód és a
+bővítmény működése az ő munkája**; ez a fork arra épül, a teljes eredeti
+történet a commitokban megőrződött.
+
+**Miért készült ez a fork?** Az eredeti tároló utolsó változtatása 2025.
+szeptember 1-jén történt („added dark mode support”), azóta nem érkezett
+újabb commit, és egy nyitott pull request vár válaszra. Közben a 444hsz.com
+már sok más oldal kommentszálait is kezeli, amelyeket a bővítmény nem
+ismert, a kód karbantartása (függőségek, tesztek, ellenőrzések, kiadások)
+pedig nem folytatódott. Ezért ez a fork folytatja a karbantartást, hogy a
+bővítmény használható és javítható maradjon. Ez nem az eredeti projekt
+hivatalos folytatása: a fork karbantartója külön személy, nem az eredeti szerző.
+
+**Mi változott az eredetihez képest?** (részletek a
+[kiadásokban](https://github.com/gszigethy/444hu_comments/releases))
+
+- minden támogatott oldal, a 444.hu is, oldalankénti bekapcsolással és a
+  böngésző engedélykérésével működik (opcionális hosztengedélyek, beállítások
+  oldal), a 444hsz.com oldallistáját követve;
+- komment blokk a 444.hu-n kívüli oldalakon is, oldalankénti beszúrási szabályokkal;
+- automatizált tesztek, minőségellenőrzés, csomagolás és kiadási folyamat;
+- magyar nyelvű dokumentáció és kézi tesztlista;
+- a 444.hu-hoz készült, eredeti megjelenítés és működés megmaradt.
+
+Ha az eredeti szerző újra aktív lesz, szívesen egyeztetünk az
+összeolvasztásról; hibát és ötletet ide, a fork GitHub-oldalára lehet küldeni.
+
 ## Licenc
 
 A Firefox-bővítményoldal a *Mozilla Public License 2.0* licencet tünteti fel.
-A repóban jelenleg nincs `LICENSE` fájl, ezt pótolni kell (lásd a fejlesztői
-dokumentáció „Ismert hiányosságok és kockázatok” részét).
+Sem az eredeti tárolóban, sem ebben a forkban nincs `LICENSE` fájl; ezt az
+eredeti szerzővel kellene tisztázni, és pótolni (lásd a fejlesztői
+dokumentáció „Ismert hiányosságok és kockázatok” részét). Az eredeti kód
+szerzői jogai nerblockot illetik, a fork saját módosításai ezen alapulnak.
 A mellékelt `backburner.js` a [Backburner.js](https://github.com/BackburnerJS/backburner.js)
 (az Ember.js ütemezője) beágyazott változata.
